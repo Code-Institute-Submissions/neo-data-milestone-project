@@ -1,0 +1,119 @@
+/*body background*/
+html, body {
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7DXELxtL_advnrfBMAKtq1gMyQ_qJ97dLAJu3I4uKS_C7rCyc");
+        height: 100%;
+}
+
+/*content display area*/
+.content-display {
+    margin: 0 5%;
+    padding: 0;
+    background-color: #f7f6f6;
+    
+    /*border-left: 5px solid #b7cee8;
+    
+    border-right: 5px solid #b7cee8;*/
+}
+
+/* title section*/
+
+.site-title {
+    text-align: center;
+    background-color: #b7cee8;
+    padding: 2% 0;
+    h1 {
+        color: #787676e6;
+        font: {
+            size: 40px;
+            weight: bold;
+        }
+    }
+}
+
+////////////////////////////*search input*/
+
+.search-input {
+
+}
+
+.search-date-input {
+    text-align: center;
+    padding: 2% 0;
+    background-color: #f7f6f6;
+    border-top: 5px solid #b7cee8;
+    
+    span {
+        font: {
+            weight: bold;
+        };
+    }
+    
+    #initial-search-date {
+        text-align: center;
+        padding: 0.18% 0;
+        margin: 0 4% 0 1%;
+        border: 1px solid #706e6e;
+    }
+    
+    button {
+        background-color: #b7cee8;
+        width: 150px;
+        margin-right: 5px;
+        border: 2px solid #fafafa;
+        color: #fafafa;
+        font: {
+            weight: bold;
+        };
+    }
+}
+
+
+
+/*data output*/
+
+.row .no-gutters .container {width: 100%;}
+
+.data-output {
+    
+    border-top: 5px solid #b7cee8;
+    background-color: #e5eceb;
+}
+
+.data-plot {
+    h5 {
+        text-align: center;
+        padding: 25px 0 15px 0;
+        line-height: 1.5;
+        font-size:20px;
+    }
+}
+
+
+/*#close-approaches-per-day {padding-left: 70px}*/
+    #neo-count, #estimated-diameter-stack, #scatter-plot  {width: 100%; margin-left: 5%; padding-bottom: 1%; 
+        svg g .axis.x .tick text {
+    text-anchor: end !important;
+    transform: rotate(-40deg); 
+    margin-top: 200px;
+}
+    }
+    
+    #neo_distance, #neo_diameter, #potential-hazard {margin-top : -100px;}
+    
+   .data-border-left { border-left: 5px solid #b7cee8;}
+     
+    #approach-distance {
+        .dc-legend{ margin-top: 10px;
+        }
+    }
+
+
+.data-table {width: 100%;}
+
+#neo_data_table {border-top: 5px solid #b7cee8; text-align: center; font-size: 13px;}
+
+
+
+
+
+

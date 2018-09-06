@@ -1,6 +1,5 @@
-
 ////////////////////////////////////////////////////////////////////////////////
-                       //CREATE GLOBAL VARIABLES//
+//CREATE GLOBAL VARIABLES//
 ////////////////////////////////////////////////////////////////////////////////
 
 var neo_array = []; //create empty to store NEO object data//
@@ -10,7 +9,7 @@ var neo_array = []; //create empty to store NEO object data//
 
 
 ////////////////////////////////////////////////////////////////////////////////
-                         //EVENT ACTIONS//
+//EVENT ACTIONS//
 ////////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(function() {
@@ -34,7 +33,7 @@ $(document).ready(function() {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-                //CREATE SERVER REQUEST IN CORRECT FORMAT//
+//CREATE SERVER REQUEST IN CORRECT FORMAT//
 ////////////////////////////////////////////////////////////////////////////////
 
 //Definition of search period function with id as input argument//
@@ -59,7 +58,7 @@ function neo_search_period(id) {
 
         date_format(new_date); //call function to format date correctly//
 
-       // document.getElementById('end-search-date').value = window.search_date; //write date to element//
+        // document.getElementById('end-search-date').value = window.search_date; //write date to element//
 
         var search_period = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + start_search_date + "&" +
             window.search_date + "&api_key=ZnhM6SAoXPwGVXYMEqYw5L4MLB7z6SQmrwv7fbuW"; //create search URL//
@@ -98,7 +97,7 @@ function date_format(date) {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-                        //RETRIEVE DATA FROM SERVER//
+//RETRIEVE DATA FROM SERVER//
 ////////////////////////////////////////////////////////////////////////////////
 
 //Retrieve data from server and make data available via callback function//
@@ -121,7 +120,7 @@ function retrieve_asteroid_data(search_url, data_create, print) {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-                  //CREATE NEW OBJECT FROM ACQUIRED DATA//
+//CREATE NEW OBJECT FROM ACQUIRED DATA//
 ////////////////////////////////////////////////////////////////////////////////
 
 //function to obtain NEO object data and create new object with required information//
@@ -170,7 +169,7 @@ function data_extraction(data) {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-                            //PLOT DATA//
+//PLOT DATA//
 ////////////////////////////////////////////////////////////////////////////////
 
 //function to create data visualisation//
@@ -184,307 +183,42 @@ function plot_create() {
     potential_hazard(ndx); //call potential hazard pie chart
     estimated_diameter_stack(ndx); //call estimated diameter stack plot
     neo_data_table(ndx); // call create NEO data table function//
-    
-    dc.renderAll();  //render all plots//
+
+    dc.renderAll(); //render all plots//
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////
-                            //PLOT CREATE FUNCTIONS//
+//PLOT CREATE FUNCTIONS//
 ////////////////////////////////////////////////////////////////////////////////
-
-
-//Date row chart//
-function neo_row_chart(data) {
-    
-    var close_approach_date_dim = data.dimension(dc.pluck('close_approach_date')); //create dimension//
-    var date_group = close_approach_date_dim.group(); //create group//
-    
-    var date_row_chart = dc.rowChart("#close-approach-date-selector"); //bind data to html element//
-    
-        date_row_chart //create chart//
-        .width(200).height(300)
-        .margins({top: 20, left: 10, right: 10, bottom: 20})
-        .dimension(close_approach_date_dim).group(date_group);
-}
-
-
-//NEO objects line chart//
-function number_hazardous_objects(data) {
-
-    var parse_date = d3.time.format("%Y-%m-%d").parse;//set format for date string//
-
-    neo_array.forEach(function(d) {
-        d.date = parse_date(d.close_approach_date); //parse date string//
-    });
-
-    var close_approach_date_dim = data.dimension(function(d) { //create dimension//
-        return d.date;
-    });
-
-    var min_date = close_approach_date_dim.bottom(1)[0].date; //create start date//
-    var max_date = close_approach_date_dim.top(1)[0].date; //create end date//
-
-    var close_approaches = close_approach_date_dim.group().reduce( //create functions to allow crossfillter to count close approaches per day//
-        function reduceAdd(p, v) { return p + 1; },
-        function reduceRemove(p, v) { return p - 1; },
-        function reduceInitialise() { return 0; }
-    );
-
-    var hazards = close_approach_date_dim.group().reduceSum(function(d) { //create functions to allow crossfillter to count potentially hazardous close approaches per day//
-        if (d.potential_hazard === true) { return +d.potential_hazard; }
-        else { return 0;}
-    });
-
-    var lessThan10millionkm = miss_distance(close_approach_date_dim, 0, 10); //call miss distance function with required arguments//
-    var greaterThan2km = estimated_diameter(close_approach_date_dim, 2, 10); //call estimated diameter function with required arguments//
-    
-    var neo_object_count_chart = dc.compositeChart("#neo-count"); //bind data to html element//
-        neo_object_count_chart //create chart//
-            .dimension(close_approach_date_dim)
-            .width(800).height(300)
-            .x(d3.time.scale().domain([min_date, max_date]))
-            .xAxisLabel("Close approach date")
-            .yAxisLabel("Number of near Earth objects")
-            .legend(dc.legend().x(80).y(20).itemHeight(13).gap(5))
-            .compose([
-                dc.lineChart(neo_object_count_chart)
-                    .colors('blue').group(close_approaches, "Number of NEO's").dashStyle([5, 5]),
-                dc.lineChart(neo_object_count_chart)
-                    .colors('red').group(hazards, "NEO's hazardous to Earth").dashStyle([2, 2]),
-                dc.lineChart(neo_object_count_chart)
-                    .colors('green').group(lessThan10millionkm, "NEO's approaching less than 10 million km to Earth").dashStyle([2, 2]).valueAccessor(function(d) {
-                    if (d.value.total > 0) { return d.value.total; } 
-                    else { return 0; } }),
-                dc.lineChart(neo_object_count_chart)
-                    .colors('purple').group(greaterThan2km, "NEO's with an estimated diameter greater than 2km").dashStyle([2, 2]).valueAccessor(function(d) {
-                    if (d.value.total > 0) { return d.value.total; }
-                    else { return 0; } }) 
-                    ])
-            .brushOn(false)
-            .elasticX(true)
-            .elasticY(true)
-            .render();
-
-}
-
-
-//Estimated maximum diameter stacked chart function//
-function estimated_diameter_stack(data) {
-
-    var close_approach_date_dim = data.dimension(dc.pluck('close_approach_date')); //create dimension based on close approach date//
-    
-    //call estimated diameter function with arguments//
-    var lessThan1km = estimated_diameter(close_approach_date_dim, 0, 1); 
-    var lessThan2km = estimated_diameter(close_approach_date_dim, 1, 2);
-    var moreThan2km = estimated_diameter(close_approach_date_dim, 2, 100);
-
-    var estimated_diameter_stack = dc.barChart("#estimated-diameter-stack"); //bind data to stacked chart//
-        estimated_diameter_stack
-        .width(500)
-        .height(300)
-        .dimension(close_approach_date_dim)
-        .group(lessThan1km, "less than 1km")
-        .stack(lessThan2km, "less than 2km")
-        .stack(moreThan2km, "greater than 2km")
-        .valueAccessor(function(d) {
-            if (d.value.total > 0) {
-                return d.value.total;
-            }
-            else {
-                return 0;
-            }
-        })
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .ordinalColors(['#b1d6de','#a1c3f0','#a1b5f0'])
-        .legend(dc.legend().x(320).y(20).itemHeight(15).gap(5))
-        .margins({ top: 10, right: 100, bottom: 30, left: 30 });
-}
-    
-
-//Potential hazard pie chart// 
-function potential_hazard(data) {
-    
-     var hazard_size = data.dimension(function(d) {
-        if (d.potential_hazard == true) {  return 'true'; }
-        else { return 'false'; }
-    });
-
-    var hazard_size_group = hazard_size.group();
-    
-    dc.pieChart("#potential-hazard")
-        .radius(100)
-        .innerRadius(40)
-        .height(400)
-        .dimension(hazard_size)
-        .group(hazard_size_group)
-        .ordinalColors(['#b1d6de','#a1c3f0'])
-        .renderLabel(false)
-        .legend(dc.legend().x(75).y(330).itemWidth(60).gap(5).horizontal(true))
-        .transitionDuration(500);
-
-}
-
-
-
-function close_approach_stack(data) {
-
-    var close_approach_date_dim = data.dimension(dc.pluck('close_approach_date')); //create dimension based on close approach date//
-
-    function miss_distance(dimension, min_distance, max_distance) {
-        return dimension.group().reduce(
-            function(p, v) {
-                if (min_distance <= v.miss_distance_km) {
-                    if (v.miss_distance_km < max_distance) {
-                        p.total++;
-                    }
-                }
-                return p;
-            },
-            function(p, v) {
-                if (min_distance <= v.miss_distance_km) {
-                    if (v.miss_distance_km < max_distance) {
-                        p.total--;
-                    }
-                }
-                return p;
-            },
-            function() {
-                return { total: 0 };
-            }
-        );
-    }
-
-    var lessThan10millionkm = miss_distance(close_approach_date_dim, 0, 10);
-    var lessThan50millionkm = miss_distance(close_approach_date_dim, 10, 50);
-    var moreThan50millionkm = miss_distance(close_approach_date_dim, 50, 100);
-
-    dc.barChart("#scatter-plot")
-        .width(500)
-        .height(300)
-        .dimension(close_approach_date_dim)
-        .group(lessThan10millionkm, "less than 10*10^6 km")
-        .stack(lessThan50millionkm, "less than 20*10^6 km")
-        .stack(moreThan50millionkm, "greater than 50*10^6 km")
-        .valueAccessor(function(d) {
-            if (d.value.total > 0) {
-                return d.value.total;
-            }
-            else {
-                return 0;
-            }
-        })
-        .x(d3.scale.ordinal())
-        .xUnits(dc.units.ordinal)
-        .ordinalColors(['red','#a1c3f0','green'])
-        .legend(dc.legend().x(320).y(20).itemHeight(15).gap(5))
-        .margins({ top: 10, right: 100, bottom: 30, left: 30 });
-}
-
-
-
-
-
-/*function size_hazard(data) {
-    
-            var chart = dc.seriesChart('#line');
-
-            neo_array.forEach(function(x) {
-               if(x.potential_hazard == true) {
-                  x.newdata = 1;
-               } else {
-                  x.newdata = 2;
-               }
-            });
-
-            var hwDimension = data.dimension(function(d) { 
-               return [d.potential_hazard, d.estimated_diameter_max];
-            });
-            var hwGroup = hwDimension.group().reduceCount();
-
-            chart
-               .width(800)
-               .height(600)
-               .chart(function(c) { 
-                  return dc.lineChart(c).interpolate('cardinal').evadeDomainFilter(true);
-               })
-               .x(d3.scale.linear().domain([0,5]))
-               .elasticY(true)
-               .brushOn(false)
-               .xAxisLabel("Height")
-               .yAxisLabel("Count")
-               .dimension(hwDimension)
-               .group(hwGroup)
-               .seriesAccessor(function(d) { return d.key[0];})
-               .keyAccessor(function(d) { return +d.key[1]; })
-               .valueAccessor(function(d) { return +d.value; })
-               .legend(dc.legend().x(350).y(500).itemHeight(13).gap(5).horizontal(1)
-                  .legendWidth(120).itemWidth(60));
-
-            chart.render();
-         }*/
-
-//NEO data table//
-function neo_data_table(data) {
-
-
-    var neo_data_dim = data.dimension(function(d) { //create dimensions to be used in plotting
-        return d;
-
-    });
-
-
-    var neo_object_table = dc.dataTable('#neo_data_table'); //bind data to table//
-
-
-    //NEO object data table//
-    neo_object_table
-        .dimension(neo_data_dim)
-        .group(function(d) { return d; })
-        .size(100)
-        .columns([
-            function(d) { return d.close_approach_date; },
-            function(d) { return d.name; },
-            function(d) { return d.miss_distance_km.toPrecision(4); },
-            function(d) { return d.estimated_diameter_max.toPrecision(4); },
-            function(d) { return d.potential_hazard; },
-            function(d) { return d.nasa_jpl_url; }
-        ])
-        .sortBy(function(d) { return d.close_approach_date; })
-        .order(d3.ascending)
-        .on('renderlet', function(table) {
-            table.select('tr.dc-table-group').remove();
-        });
-}
 
 
 //miss distance function//
 function miss_distance(dimension, min_distance, max_distance) {
-        return dimension.group().reduce(
-            function(p, v) {
-                if (min_distance <= v.miss_distance_km) {
-                    if (v.miss_distance_km < max_distance) {
-                        p.total++;
-                    }
+    return dimension.group().reduce(
+        function(p, v) {
+            if (min_distance <= v.miss_distance_km) {
+                if (v.miss_distance_km < max_distance) {
+                    p.total++;
                 }
-                return p;
-            },
-            function(p, v) {
-                if (min_distance <= v.miss_distance_km) {
-                    if (v.miss_distance_km < max_distance) {
-                        p.total--;
-                    }
-                }
-                return p;
-            },
-            function() {
-                return { total: 0 };
             }
-        );
-    }
-    
-    
+            return p;
+        },
+        function(p, v) {
+            if (min_distance <= v.miss_distance_km) {
+                if (v.miss_distance_km < max_distance) {
+                    p.total--;
+                }
+            }
+            return p;
+        },
+        function() {
+            return { total: 0 };
+        }
+    );
+}
+
+
 //estimated diameter function//
 function estimated_diameter(dimension, min_size, max_size) {
     return dimension.group().reduce(
@@ -508,4 +242,201 @@ function estimated_diameter(dimension, min_size, max_size) {
             return { total: 0 };
         }
     );
+}
+ 
+ 
+//Date row chart//
+function neo_row_chart(data) {
+
+    var close_approach_date_dim = data.dimension(dc.pluck('close_approach_date')); //create dimension//
+    var date_group = close_approach_date_dim.group(); //create group//
+
+    var date_row_chart = dc.rowChart("#close-approach-date-selector"); //bind data to html element//
+        date_row_chart //create chart//
+            .width(200).height(300)
+            .margins({ top: 20, left: 10, right: 10, bottom: 20 })
+            .dimension(close_approach_date_dim).group(date_group);
+}
+
+
+//NEO objects line chart//
+function number_hazardous_objects(data) {
+
+    var parse_date = d3.time.format("%Y-%m-%d").parse; //set format for date string//
+
+    neo_array.forEach(function(d) {
+        d.date = parse_date(d.close_approach_date); //parse date string//
+    });
+
+    var close_approach_date_dim = data.dimension(function(d) { //create dimension//
+        return d.date;
+    });
+
+    var min_date = close_approach_date_dim.bottom(1)[0].date; //create start date//
+    var max_date = close_approach_date_dim.top(1)[0].date; //create end date//
+
+    var close_approaches = close_approach_date_dim.group().reduce( //create functions to allow crossfillter to count close approaches per day//
+        function reduceAdd(p, v) { return p + 1; },
+        function reduceRemove(p, v) { return p - 1; },
+        function reduceInitialise() { return 0; }
+    );
+
+    var hazards = close_approach_date_dim.group().reduceSum(function(d) { //create functions to allow crossfillter to count potentially hazardous close approaches per day//
+        if (d.potential_hazard === true) { return +d.potential_hazard; }
+        else { return 0; }
+    });
+
+    var lessThan10millionkm = miss_distance(close_approach_date_dim, 0, 10); //call miss distance function with required arguments//
+    var greaterThan2km = estimated_diameter(close_approach_date_dim, 2, 10); //call estimated diameter function with required arguments//
+
+    var neo_object_count_chart = dc.compositeChart("#neo-count"); //bind data to html element//
+        neo_object_count_chart //create chart//
+            .dimension(close_approach_date_dim)
+            .width(800).height(300)
+            .x(d3.time.scale().domain([min_date, max_date]))
+            .xAxisLabel("Close approach date")
+            .yAxisLabel("Number of near Earth objects")
+            .legend(dc.legend().x(80).y(20).itemHeight(13).gap(5))
+            .compose([
+                dc.lineChart(neo_object_count_chart)
+                .colors('blue').group(close_approaches, "Number of NEO's").dashStyle([5, 5]),
+                dc.lineChart(neo_object_count_chart)
+                .colors('red').group(hazards, "NEO's hazardous to Earth").dashStyle([2, 2]),
+                dc.lineChart(neo_object_count_chart)
+                .colors('green').group(lessThan10millionkm, "NEO's approaching less than 10 million km to Earth").dashStyle([2, 2]).valueAccessor(function(d) {
+                    if (d.value.total > 0) { return d.value.total; }
+                    else { return 0; }
+                }),
+                dc.lineChart(neo_object_count_chart)
+                .colors('purple').group(greaterThan2km, "NEO's with an estimated diameter greater than 2km").dashStyle([2, 2]).valueAccessor(function(d) {
+                    if (d.value.total > 0) { return d.value.total; }
+                    else { return 0; }
+                })
+            ])
+            .brushOn(false)
+            .elasticX(true)
+            .elasticY(true)
+            
+            .render()
+            .xAxis().tickFormat(d3.time.format("%Y-%m-%d")).ticks(8);
+
+}
+
+
+//Estimated maximum diameter stacked chart function//
+function estimated_diameter_stack(data) {
+
+    var close_approach_date_dim = data.dimension(dc.pluck('close_approach_date')); //create dimension based on close approach date//
+
+    //call estimated diameter function with arguments//
+    var lessThan1km = estimated_diameter(close_approach_date_dim, 0, 1);
+    var lessThan2km = estimated_diameter(close_approach_date_dim, 1, 2);
+    var moreThan2km = estimated_diameter(close_approach_date_dim, 2, 100);
+
+    var estimated_diameter_stack = dc.barChart("#estimated-diameter-stack"); //bind data to stacked chart//
+        estimated_diameter_stack
+            .width(500)
+            .height(300)
+            .dimension(close_approach_date_dim)
+            .group(lessThan1km, "less than 1km")
+            .stack(lessThan2km, "less than 2km")
+            .stack(moreThan2km, "greater than 2km")
+            .valueAccessor(function(d) {
+                if (d.value.total > 0) {
+                    return d.value.total;
+                }
+                else {
+                    return 0;
+                }
+            })
+            .x(d3.scale.ordinal())
+            .xUnits(dc.units.ordinal)
+            .ordinalColors(['#b1d6de', '#a1c3f0', '#a1b5f0'])
+            .legend(dc.legend().x(320).y(20).itemHeight(15).gap(5))
+            .margins({ top: 10, right: 100, bottom: 30, left: 30 });
+}
+
+
+//Potential hazard pie chart// 
+function potential_hazard(data) {
+
+    var hazard_size = data.dimension(function(d) { //create dimension based on potential hazard//
+        if (d.potential_hazard == true) { return 'true'; }
+        else { return 'false'; }
+    });
+
+    var hazard_size_group = hazard_size.group(); //create data group//
+
+    var hazardous_neo = dc.pieChart("#potential-hazard") //bind data to chart//
+        hazardous_neo
+            .radius(100)
+            .innerRadius(40)
+            .height(400)
+            .dimension(hazard_size)
+            .group(hazard_size_group)
+            .ordinalColors(['#b1d6de', '#a1c3f0'])
+            .renderLabel(false)
+            .legend(dc.legend().x(75).y(330).itemWidth(60).gap(5).horizontal(true))
+            .transitionDuration(500);
+
+}
+
+
+//Close approach distance stacked chart//
+function close_approach_stack(data) {
+
+    var close_approach_date_dim = data.dimension(dc.pluck('close_approach_date')); //create dimension based on close approach date//
+
+    //call miss distance function with required arguments//
+    var lessThan10millionkm = miss_distance(close_approach_date_dim, 0, 10);
+    var lessThan50millionkm = miss_distance(close_approach_date_dim, 10, 50);
+    var moreThan50millionkm = miss_distance(close_approach_date_dim, 50, 100);
+
+    var close_approach_stacked = dc.barChart("#scatter-plot"); //bind data to stacked chart//
+        close_approach_stacked
+            .width(500)
+            .height(300)
+            .dimension(close_approach_date_dim)
+            .group(lessThan10millionkm, "less than 10*10^6 km")
+            .stack(lessThan50millionkm, "less than 20*10^6 km")
+            .stack(moreThan50millionkm, "greater than 50*10^6 km")
+            .valueAccessor(function(d) {
+                if (d.value.total > 0) {
+                    return d.value.total;
+                }
+                else {
+                    return 0;
+                }
+            })
+            .x(d3.scale.ordinal())
+            .xUnits(dc.units.ordinal)
+            .ordinalColors(['red', '#a1c3f0', 'green'])
+            .legend(dc.legend().x(320).y(20).itemHeight(15).gap(5))
+            .margins({ top: 10, right: 100, bottom: 30, left: 30 });
+}
+
+
+//NEO data table//
+function neo_data_table(data) {
+
+    var neo_data_dim = data.dimension(function(d) { return d; }); //create dimensions to be used in plotting
+
+    var neo_object_table = dc.dataTable('#neo_data_table'); //bind data to table//
+        neo_object_table
+            .dimension(neo_data_dim)
+            .group(function(d) { return d; })
+            .size(100)
+            .columns([
+                function(d) { return d.close_approach_date; },
+                function(d) { return d.name; },
+                function(d) { return d.miss_distance_km.toPrecision(4); },
+                function(d) { return d.estimated_diameter_max.toPrecision(4); },
+                function(d) { return d.potential_hazard; },
+                function(d) { return d.nasa_jpl_url; }
+            ])
+            .sortBy(function(d) { return d.close_approach_date; })
+            .order(d3.ascending)
+            .on('renderlet', function(table) {
+                table.select('tr.dc-table-group').remove();
+            });
 }

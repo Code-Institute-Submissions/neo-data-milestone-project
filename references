@@ -1,0 +1,56 @@
+//// clear input field text on refresh
+https://stackoverflow.com/questions/52213/browser-refresh-behaviour
+
+///////////////////////////// placeholder
+https://www.w3schools.com/tags/att_input_placeholder.asp
+
+////////////////dc.js  table
+https://github.com/austinlyons/dcjs-leaflet-untappd
+
+
+////number precision
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Number/toPrecision
+
+//// date format
+
+https://jsfiddle.net/taditdash/8FHwL/
+https://jqueryui.com/datepicker/
+
+
+//////////////
+///datepicker format
+https://stackoverflow.com/questions/1328025/jquery-ui-datepicker-change-date-format
+////////////////////
+
+
+
+////final js date code
+
+https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
+
+
+
+
+/// object properties
+https://dmitripavlutin.com/how-to-iterate-easily-over-object-properties-in-javascript/
+
+search sort//
+https://gist.github.com/onpubcom/1772996
+
+//push to array//
+https://stackoverflow.com/questions/12491101/javascript-create-array-from-for-loop
+
+//add function for array//
+https://medium.com/@chrisburgin95/rewriting-javascript-sum-an-array-dbf838996ed0
+
+//iterate through object keys//
+
+http://pietschsoft.com/post/2015/09/05/JavaScript-Basics-How-to-create-a-Dictionary-with-KeyValue-pairs
+
+
+//callback functions//
+https://www.dashingd3js.com/lessons/javascript-callback-functions
+
+//ticks on x-axis//
+https://stackoverflow.com/questions/21497359/d3-js-change-format-of-price-and-date
