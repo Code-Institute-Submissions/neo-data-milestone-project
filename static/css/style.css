@@ -1,6 +1,6 @@
 /*body background*/
 html, body {
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7DXELxtL_advnrfBMAKtq1gMyQ_qJ97dLAJu3I4uKS_C7rCyc");
+  background-image: url("https://i.pinimg.com/originals/d5/32/02/d532024c1c7813688cff6bf5645a1ef7.jpg");
   height: 100%; }
 
 /*content display area*/
@@ -16,9 +16,9 @@ html, body {
 .site-title {
   text-align: center;
   background-color: #b7cee8;
-  padding: 2% 0; }
+  padding: 1% 0; }
   .site-title h1 {
-    color: #787676e6;
+    color: #fafafa;
     font-size: 40px;
     font-weight: bold; }
 
@@ -26,19 +26,22 @@ html, body {
   text-align: center;
   padding: 2% 0;
   background-color: #f7f6f6;
-  border-top: 5px solid #b7cee8; }
+  border-top: 3px solid #bcc1c7; }
+  .search-date-input p {
+    text-align: justify;
+    margin: 0 3% 1% 3%; }
   .search-date-input span {
     font-weight: bold; }
-  .search-date-input #initial-search-date {
+  .search-date-input input {
     text-align: center;
-    padding: 0.18% 0;
+    padding: 0.18% 0.2%;
     margin: 0 4% 0 1%;
     border: 1px solid #706e6e; }
   .search-date-input button {
     background-color: #b7cee8;
     width: 150px;
     margin-right: 5px;
-    border: 2px solid #fafafa;
+    border: 3px solid #bcc1c7;
     color: #fafafa;
     font-weight: bold; }
 
@@ -47,8 +50,8 @@ html, body {
   width: 100%; }
 
 .data-output {
-  border-top: 5px solid #b7cee8;
-  background-color: #e5eceb; }
+  border-top: 3px solid #bcc1c7;
+  background-color: #fafafa; }
 
 .data-plot h5 {
   text-align: center;
@@ -66,11 +69,11 @@ html, body {
     transform: rotate(-40deg);
     margin-top: 200px; }
 
-#neo_distance, #neo_diameter, #potential-hazard {
-  margin-top: -100px; }
+#potential-hazard {
+  margin-top: -50px; }
 
 .data-border-left {
-  border-left: 5px solid #b7cee8; }
+  border-left: 3px solid #bcc1c7; }
 
 #approach-distance .dc-legend {
   margin-top: 10px; }
@@ -79,8 +82,16 @@ html, body {
   width: 100%; }
 
 #neo_data_table {
-  border-top: 5px solid #b7cee8;
+  border-top: 3px solid #bcc1c7;
   text-align: center;
   font-size: 13px; }
+
+.data-plot-title {
+  background-color: #f7f6f6; }
+  .data-plot-title h5 {
+    text-align: center;
+    padding: 15px 0 10px 0;
+    line-height: 1.5;
+    font-size: 20px; }
 
 /*# sourceMappingURL=style.css.map */

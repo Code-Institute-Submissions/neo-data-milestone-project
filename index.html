@@ -36,15 +36,23 @@
     <div class="row no-gutters">
       <!--site title-->
       <div class='col-12 site-title'>
-        <h1> Near Earth Objects : Close Approach Information</h1>
+        <h1> Near Earth Objects : Close Approach Data Dashboard</h1>
       </div>
     </div>
 
 
     <div class="row no-gutters search-input">
       <div class="col-12  search-date-input">
+        <p>
+        This website takes data from the free NASA API: <a href = "https://api.nasa.gov/api.html#neows-feed">Neo-Feed</a>, which retrieves a 
+        list of Near Earth Objects (NEO's) based on their close approach date to Earth over a period of 1 week from a specified start date. 
+        A data dashboard is created from the information received from the API, the focus of which are data visualisations based upon the estimated 
+        maximum diameter of the NEO; it's close approach distance to Earth; and whether the NEO is potentially hazardous to Earth. It should 
+        be noted that the NEO's potential hazard to Earth is not specifically based upon whether it is immediately hazardous to Earth but it may be at a later date. 
+        Create the data visualisations by entering a start date for the search then press the 'Start Search' button to generate the data dashboard
+        </p>
         <span>Please enter a start date for the search: </span>
-        <input id="initial-search-date" type="text" autocomplete="off" placeholder="Click here to input date" />
+        <input id="initial-search-date" type="text" autocomplete="off" placeholder="Click here to input date"/>
         <button id='prev' class="data">Previous Week</button>
         <button id='search' class="data">Start Search</button>
         <button id='next' class="data">Next Week</button>
@@ -57,51 +65,38 @@
     <div class='row no-gutters data-output'>
       
       <div class="col-4 data-plot" id="close-approaches">
-        <h5 class="data-output-title"> Close approaches per day</h5>
+        <h5> Close approaches per day</h5>
         <div id="close-approach-date-selector"></div>
       </div>
       
       <div class="col-8 data-plot data-border-left">
-        <h5 class="data-output-title"> Close approaches per day</h5>
-        <div id="neo-count"><a class='reset'
-          href='javascript:myChart.filterAll();dc.redrawAll();'
-          style='visibility: hidden;'>reset</a>
-          </div>
+        <h5> Close approaches per day</h5>
+        <div id="neo-count"></div>
       </div>
     </div>
 
 <div class="row no-gutters data-output">
       <div class="col-5 data-plot">
-        <h5 class="data-output-title"> Earth miss distance in 10^6 km</h5>
-        <div id="scatter-plot"></div>
+        <h5> Earth miss distance (10^6 km)</h5>
+        <div id="close-approach-plot"></div>
       </div>
       <div class="col-2 data-plot data-border-left">
-        <h5 class="data-output-title"> Potential hazard to Earth?</h5>
+        <h5> Hazard to Earth?</h5>
         <div id="potential-hazard"></div>
       </div>
       <div class="col-5 data-plot data-border-left">
-        <h5 class="data-output-title"> Estimated maximum NEO diameter</h5>
+        <h5> Estimated maximum NEO diameter (km)</h5>
         <div id="estimated-diameter-stack"></div>
       </div>
-      <!--<div class="col-4 data-plot" id="approach-distance">
-        <h5 class="data-output-title"> Close approach distance</h5>
-        <div id="neo_distance" class='reset'></div>
-      </div>
-
-      <div class="col-4 data-plot data-border-left" id="max-diameter">
-        <h5 class="data-output-title"> Estimated maximum diameter</h5>
-        <div id="neo_diameter" class='reset'></div>
-      </div>
-
-      <div class="col-4 data-plot data-border-left">
-        <h5 class="data-output-title"> Potential hazard to Earth?</h5>
-        <div id="potential-hazard"></div>
-      </div>-->
     </div>
     
 
 
-    <div class='row no-gutters data-table'>
+    <div class='row no-gutters data-table data-output'>
+      <div class="col-12 data-plot-title">
+        <h5> Table of Near Earth object data</h5>
+      </div>
+      
       <div class="col-12">
         <table class="table table-bordered table-striped" id="neo_data_table">
           <thead>
