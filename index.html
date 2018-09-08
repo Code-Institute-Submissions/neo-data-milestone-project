@@ -36,7 +36,7 @@
     <div class="row no-gutters">
       <!--site title-->
       <div class='col-12 site-title'>
-        <h1> Near Earth Objects : Close Approach Data Dashboard</h1>
+        <h1> Near Earth Object Close Approach Data Visualisation</h1>
       </div>
     </div>
 
@@ -44,7 +44,7 @@
     <div class="row no-gutters search-input">
       <div class="col-12  search-date-input">
         <p>
-        This website takes data from the freely available NASA API: <a href = "https://api.nasa.gov/api.html#neows-feed">Neo-Feed</a>. This API retrieves a 
+        This website takes data from the freely available NASA API: <a id='neo-feed' target="_blank" href = "https://api.nasa.gov/api.html#neows-feed">Neo-Feed</a>. This API retrieves a 
         list of Near Earth Objects (NEO's) based on their close approach date to Earth over a period of 1 week from a specified start date. 
         A data dashboard is created from the information received from the API, the focus of which are data visualisations based upon the estimated 
         maximum diameter of the NEO; it's close approach distance to Earth; and whether the NEO is potentially hazardous to Earth. It should 
@@ -62,22 +62,22 @@
     <div class='row no-gutters data-output data-hidden'>
       <div class="col-8 data-plot">
         <h5> Close approaches per day</h5>
-        <div id="neo-count"></div>
+        <div id="neo-count" class="plot-view"></div>
       </div>
       <div class="col-4 data-plot data-border-left">
         <h5> Hazard to Earth?</h5>
-        <div id="potential-hazard"></div>
+        <div id="potential-hazard" class="plot-view"></div>
       </div>
     </div>
 
 <div class="row no-gutters data-output data-hidden">
       <div class="col-6 data-plot">
         <h5> Earth miss distance (10^6 km)</h5>
-        <div id="close-approach-plot"></div>
+        <div id="close-approach-plot" class="plot-view"></div>
       </div>
       <div class="col-6 data-plot data-border-left">
         <h5> Estimated maximum NEO diameter (km)</h5>
-        <div id="estimated-diameter-stack"></div>
+        <div id="estimated-diameter-stack" class="plot-view"></div>
       </div>
     </div>
     
@@ -85,7 +85,7 @@
 
     <div class='row no-gutters data-table data-output data-hidden'>
       <div class="col-12 data-plot-title">
-        <h5> Top 10 Closest Approaches</h5>
+        <h3> Top 10 Closest Approaches</h3>
       </div>
       
       <div class="col-12">

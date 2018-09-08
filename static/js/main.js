@@ -30,12 +30,16 @@ $(document).ready(function() {
         else {
             var button_id = this.id.toString(); //get the id of the search button clicked //
             neo_search_period(button_id); //call search period function with button id as argument//
-        }
-    });
+        }})
+    .mouseenter( function() {$(this).animate({"color":"black"}, 800)})
+    .mouseleave(function() {$(this).animate({"color":'#706e6e'}, 800)});
 
     $('#initial-search-date').focus(function() {
         $('.ui-datepicker').addClass('calendar-background');
     });
+    
+    $('#neo-feed').mouseenter( function() {$(this).animate({"color":"#eb5d5d"}, 800)})
+                  .mouseleave(function() {$(this).animate({"color":'#007bff'}, 800)});
  
 /* $('#search').click(function() {
         if (document.getElementById('initial-search-date').value != 'Please enter a date') {
@@ -45,7 +49,7 @@ $(document).ready(function() {
     
     $('#search').click(function() {
         if (document.getElementById('initial-search-date').value != 'Please enter a date') {
-            $('.data-output').delay(1500).queue(function() {
+            $('.data-output').delay(2000).queue(function() {
                 $(this).removeClass('data-hidden'); //reveal data output container elements//
             });
         }
@@ -281,6 +285,7 @@ function number_hazardous_objects(data) {
             .width(800)
             .height(350)
             .x(d3.time.scale().domain([min_date, max_date]))
+            .title(function(d) { return  d.key; })
             .compose([
                 dc.lineChart(neo_object_count_chart)
                 .colors('#96bae2')
@@ -300,6 +305,7 @@ function number_hazardous_objects(data) {
                 .valueAccessor(function(d) {
                     if (d.value.total > 0) { return d.value.total; }
                     else { return 0; }})])
+                
             .brushOn(false)
             .elasticX(true)
             .elasticY(true)
@@ -324,14 +330,19 @@ function potential_hazard(data) {
 
     var hazardous_neo = dc.pieChart("#potential-hazard"); //bind data to chart//
         hazardous_neo
-            .radius(100)
+            .radius(120)
             .innerRadius(40)
             .height(400)
+            .width(300)
             .dimension(hazard_size)
             .group(hazard_size_group)
             .ordinalColors(['#ade49b', '#eb5d5d'])
+            .title(function(d) { if (d.key === 'YES') {
+                return "A potential risk to Earth is posed by these " + d.value +" NEO's"}
+                else {return "No risk to Earth is posed by these " + d.value +" NEO's"}
+             })
             .renderLabel(true)
-            .legend(dc.legend().x(75).y(330).itemWidth(60).gap(5).horizontal(true))
+            .legend(dc.legend().x(120).y(350).itemWidth(60).gap(5).horizontal(true))
             .transitionDuration(500);
 }
 
@@ -361,6 +372,9 @@ function close_approach_stack(data) {
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
             .ordinalColors(['#eb5d5d', '#b7cee8', '#ade49b'])
+            .title(function(d) {
+            return "There are " + d.value.total + " NEO's with this miss distance on "+ d.key;
+             })
             .legend(dc.legend().x(50).y(-2).itemWidth(140).gap(5).horizontal(true))
             .yAxisLabel("Number of NEO objects")
             .xAxisLabel("Close approach date");
@@ -371,7 +385,7 @@ function close_approach_stack(data) {
 function estimated_diameter_stack(data) {
 
     var close_approach_date_dim = data.dimension(dc.pluck('close_approach_date')); //create dimension based on close approach date//
-
+        
     //call estimated diameter function with arguments//
     var lessThan1km = estimated_diameter(close_approach_date_dim, 0, 1);
     var lessThan2km = estimated_diameter(close_approach_date_dim, 1, 2);
@@ -392,6 +406,9 @@ function estimated_diameter_stack(data) {
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
             .ordinalColors(['#ade49b', '#b7cee8', '#eb5d5d'])
+            .title(function(d) {
+            return "There are " + d.value.total + " NEO's with this estimated maximum diameter approaching on "+ d.key;
+             })
             .legend(dc.legend().x(100).y(-2).itemWidth(100).gap(5).horizontal(true))
             .yAxisLabel("Number of NEO objects")
             .xAxisLabel("Close approach date");
