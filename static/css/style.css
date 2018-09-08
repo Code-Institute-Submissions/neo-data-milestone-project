@@ -1,16 +1,16 @@
 /*body background*/
 html, body {
-  background-image: url("https://i.pinimg.com/originals/d5/32/02/d532024c1c7813688cff6bf5645a1ef7.jpg");
-  height: 100%; }
+  background-image: url("https://thefulldomeblog.files.wordpress.com/2013/06/cropped-starglobe-maya-render.jpg");
+  height: 100%;
+  width: 100%; }
 
 /*content display area*/
 .content-display {
   margin: 0 5%;
   padding: 0;
   background-color: #f7f6f6;
-  /*border-left: 5px solid #b7cee8;
-  
-  border-right: 5px solid #b7cee8;*/ }
+  border-left: 2px solid #706e6e;
+  border-right: 2px solid #706e6e; }
 
 /* title section*/
 .site-title {
@@ -45,6 +45,17 @@ html, body {
     color: #fafafa;
     font-weight: bold; }
 
+.calendar-background {
+  background-color: #fafafa;
+  padding: 10px;
+  border: 1px solid black; }
+
+/*.ui-datepicker-header {color: #706e6e; font-weight:bold;}
+.ui-datepicker-calendar {color: #706e6e;
+    thead {color: #b7cee8; }
+    th title {color: #b7cee8;}
+}
+.ui-icon {padding-right: 5px;}*/
 /*data output*/
 .row .no-gutters .container {
   width: 100%; }
@@ -60,11 +71,11 @@ html, body {
   font-size: 20px; }
 
 /*#close-approaches-per-day {padding-left: 70px}*/
-#neo-count, #estimated-diameter-stack, #scatter-plot {
+#neo-count, #close-approach-plot, #estimated-diameter-stack {
   width: 100%;
   margin-left: 5%;
   padding-bottom: 1%; }
-  #neo-count svg g .axis.x .tick text, #estimated-diameter-stack svg g .axis.x .tick text, #scatter-plot svg g .axis.x .tick text {
+  #neo-count svg g .axis.x .tick text, #close-approach-plot svg g .axis.x .tick text, #estimated-diameter-stack svg g .axis.x .tick text {
     text-anchor: end !important;
     transform: rotate(-40deg);
     margin-top: 200px; }
@@ -93,5 +104,8 @@ html, body {
     padding: 15px 0 10px 0;
     line-height: 1.5;
     font-size: 20px; }
+
+.data-hidden {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */
