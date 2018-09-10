@@ -49,7 +49,7 @@ $(document).ready(function() {
     
     $('#search').click(function() {
         if (document.getElementById('initial-search-date').value != 'Please enter a date') {
-            $('.data-output').delay(2000).queue(function() {
+            $('.data-content').delay(2000).queue(function() {
                 $(this).removeClass('data-hidden'); //reveal data output container elements//
             });
         }
@@ -180,12 +180,16 @@ function data_extraction(data) {
 function plot_create() {
 
     var ndx = crossfilter(neo_array); //pass data to crossfilter from NEO object array//
-
-    number_hazardous_objects(ndx); //call composite chart of number of hazardous objects//
-    potential_hazard(ndx); //call potential hazard pie chart
-    close_approach_stack(ndx); //call close approach stack plot
-    estimated_diameter_stack(ndx); //call estimated diameter stack plot
-    neo_data_table(ndx); // call create NEO data table function//
+    
+    //define chart variables names//
+    var neo_object_count_chart, hazardous_neo, close_approach_stacked, estimated_diameter_stacked, total_neo_count, neo_object_table;
+        
+    number_hazardous_objects(ndx, neo_object_count_chart); //call composite chart of number of hazardous objects//
+    potential_hazard(ndx, hazardous_neo); //call potential hazard pie chart//
+    close_approach_stack(ndx, close_approach_stacked); //call close approach stack plot//
+    estimated_diameter_stack(ndx,estimated_diameter_stacked); //call estimated diameter stack plot//
+    neo_count(ndx,total_neo_count); // call total count function//
+    neo_data_table(ndx, neo_object_table); // call create NEO data table function//
 
     dc.renderAll(); //render all plots//
 }
@@ -249,7 +253,7 @@ function estimated_diameter(dimension, min_size, max_size) {
 
 
 //NEO objects line chart//
-function number_hazardous_objects(data) {
+function number_hazardous_objects(data, chart) {
 
     var parse_date = d3.time.format("%Y-%m-%d").parse; //set format for date string//
 
@@ -278,28 +282,28 @@ function number_hazardous_objects(data) {
     var lessThan10millionkm = miss_distance(close_approach_date_dim, 0, 10); //call miss distance function with required arguments//
     var greaterThan2km = estimated_diameter(close_approach_date_dim, 2, 10); //call estimated diameter function with required arguments//
 
-    var neo_object_count_chart = dc.compositeChart("#neo-count"); //bind data to html element//
-        neo_object_count_chart //create chart//
+    chart = dc.compositeChart("#neo-count"); //bind data to html element//
+            chart //create chart//
             .margins({ top: 60, right: 30, bottom: 80, left: 40 })
             .dimension(close_approach_date_dim)
-            .width(800)
+            .width(700)
             .height(350)
             .x(d3.time.scale().domain([min_date, max_date]))
             .title(function(d) { return  d.key; })
             .compose([
-                dc.lineChart(neo_object_count_chart)
+                dc.lineChart(chart)
                 .colors('#96bae2')
                 .group(close_approaches, "Total number of NEO's per day"),
-                dc.lineChart(neo_object_count_chart)
+                dc.lineChart(chart)
                 .colors('#eb5d5d')
                 .group(hazards, "Neo's potentially hazardous to Earth"),
-                dc.lineChart(neo_object_count_chart)
+                dc.lineChart(chart)
                 .colors('#ade49b')
                 .group(lessThan10millionkm, "Miss distance less than 10 million km ")
                 .valueAccessor(function(d) {
                     if (d.value.total > 0) { return d.value.total; }
                     else { return 0; } }),
-                dc.lineChart(neo_object_count_chart)
+                dc.lineChart(chart)
                 .colors('#e378e4')
                 .group(greaterThan2km, "Estimated diameter greater than 2km")
                 .valueAccessor(function(d) {
@@ -310,8 +314,8 @@ function number_hazardous_objects(data) {
             .elasticX(true)
             .elasticY(true)
             .xAxisLabel("Close approach date")
-            .yAxisLabel("Number of NEO's")
-            .legend(dc.legend().x(150).y(-3).itemWidth(250).gap(20).horizontal(true))
+            .yAxisLabel("Number of NEO objects")
+            .legend(dc.legend().x(150).y(-2).itemWidth(250).gap(20).horizontal(true))
             .render()
             .xAxis().tickFormat(d3.time.format("%Y-%m-%d")).ticks(8);
 
@@ -319,7 +323,7 @@ function number_hazardous_objects(data) {
 
 
 //Potential hazard pie chart// 
-function potential_hazard(data) {
+function potential_hazard(data, chart) {
 
     var hazard_size = data.dimension(function(d) { //create dimension based on potential hazard//
         if (d.potential_hazard == true) { return 'YES'; }
@@ -328,8 +332,8 @@ function potential_hazard(data) {
 
     var hazard_size_group = hazard_size.group(); //create data group//
 
-    var hazardous_neo = dc.pieChart("#potential-hazard"); //bind data to chart//
-        hazardous_neo
+     chart = dc.pieChart("#potential-hazard"); //bind data to chart//
+        chart
             .radius(120)
             .innerRadius(40)
             .height(400)
@@ -348,7 +352,7 @@ function potential_hazard(data) {
 
 
 //Close approach distance stacked chart//
-function close_approach_stack(data) {
+function close_approach_stack(data, chart) {
 
     var close_approach_date_dim = data.dimension(dc.pluck('close_approach_date')); //create dimension based on close approach date//
 
@@ -357,8 +361,8 @@ function close_approach_stack(data) {
     var lessThan50millionkm = miss_distance(close_approach_date_dim, 10, 50);
     var moreThan50millionkm = miss_distance(close_approach_date_dim, 50, 100);
 
-    var close_approach_stacked = dc.barChart("#close-approach-plot"); //bind data to stacked chart//
-        close_approach_stacked
+        chart = dc.barChart("#close-approach-plot"); //bind data to stacked chart//
+        chart
             .margins({ top: 50, right: 30, bottom: 80, left: 40 })
             .width(500)
             .height(350)
@@ -382,7 +386,7 @@ function close_approach_stack(data) {
 
 
 //Estimated maximum diameter stacked chart function//
-function estimated_diameter_stack(data) {
+function estimated_diameter_stack(data, chart) {
 
     var close_approach_date_dim = data.dimension(dc.pluck('close_approach_date')); //create dimension based on close approach date//
         
@@ -391,8 +395,8 @@ function estimated_diameter_stack(data) {
     var lessThan2km = estimated_diameter(close_approach_date_dim, 1, 2);
     var moreThan2km = estimated_diameter(close_approach_date_dim, 2, 100);
 
-    var estimated_diameter_stack = dc.barChart("#estimated-diameter-stack"); //bind data to stacked chart//
-        estimated_diameter_stack
+        chart = dc.barChart("#estimated-diameter-stack"); //bind data to stacked chart//
+        chart
             .margins({ top: 50, right: 30, bottom: 80, left: 40 })
             .width(500)
             .height(350)
@@ -414,14 +418,23 @@ function estimated_diameter_stack(data) {
             .xAxisLabel("Close approach date");
 }
 
+//Total object count//
+function neo_count(data, count) {
+    
+    var all = data.groupAll();
+    
+    count = dc.dataCount("#data-count")
+    .dimension(data)
+    .group(all);
+}
 
 //NEO data table//
-function neo_data_table(data) {
+function neo_data_table(data, table) {
 
     var neo_data_dim = data.dimension(function(d) { return d; }); //create dimensions to be used in plotting
 
-    var neo_object_table = dc.dataTable('#neo_data_table'); //bind data to table//
-        neo_object_table
+        table = dc.dataTable('#neo_data_table'); //bind data to table//
+        table
             .dimension(neo_data_dim)
             .group(function(d) { return d; })
             .size(10)

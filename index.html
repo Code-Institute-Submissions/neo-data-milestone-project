@@ -14,8 +14,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.css" type="text/css" />
   <link rel="stylesheet" href="static/css/style.css" type="text/css" />
-  <!--bootswatch-->
-
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <!--css-->
 
   <!--js-->
@@ -24,72 +23,90 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
   <script type="text/javascript" src="static/js/main.js"></script>
   <!--js-->
 </head>
 
 
 <body>
+
+  <!--content display area-->
   <div class='content-display'>
 
+    <!--site title area and text-->
     <div class="row no-gutters">
-      <!--site title-->
       <div class='col-12 site-title'>
         <h1> Near Earth Object Close Approach Data Visualisation</h1>
       </div>
     </div>
+    <!--site title area and text-->
 
-
+    <!--data search input area-->
     <div class="row no-gutters search-input">
-      <div class="col-12  search-date-input">
+      <div class="col-12 search-date-input">
         <p>
-        This website takes data from the freely available NASA API: <a id='neo-feed' target="_blank" href = "https://api.nasa.gov/api.html#neows-feed">Neo-Feed</a>. This API retrieves a 
-        list of Near Earth Objects (NEO's) based on their close approach date to Earth over a period of 1 week from a specified start date. 
-        A data dashboard is created from the information received from the API, the focus of which are data visualisations based upon the estimated 
-        maximum diameter of the NEO; it's close approach distance to Earth; and whether the NEO is potentially hazardous to Earth. It should 
-        be noted that the NaEO's potential hazard to Earth is not specifically based upon whether it is immediately hazardous to Earth but it may be at a later date. 
-        Create the data visualisations by entering a start date for the search then press the 'Start Search' button to generate the data dashboard
+          This website takes data from the freely available NASA API: <a id='neo-feed' target="_blank" href="https://api.nasa.gov/api.html#neows-feed">Neo-Feed</a>. This API retrieves a list of Near Earth Objects (NEO's) based on their close approach
+          date to Earth over a period of 1 week from a specified start date. A data dashboard is created from the information received from the API, the focus of which are data visualisations based upon the estimated maximum diameter of the NEO; it's
+          close approach distance to Earth; and whether the NEO is potentially hazardous to Earth. It should be noted that the NEO's potential hazard to Earth is not specifically based upon whether it is immediately hazardous to Earth but it may be at
+          a later date. Create the data visualisations by entering a start date for the search then press the 'Start Search' button to generate the data dashboard.
         </p>
         <span>Please enter a start date for the search: </span>
-        <input id="initial-search-date" type="text" autocomplete="off" placeholder="Click here to input date"/>
+        <input id="initial-search-date" type="text" autocomplete="off" placeholder="Click here to input date" />
+      </div>
+      <div class="col-12 search-date-input">
         <button id='prev' class="data">Previous Week</button>
         <button id='search' class="data">Start Search</button>
         <button id='next' class="data">Next Week</button>
       </div>
     </div>
+    <!--data search input area-->
 
-    <div class='row no-gutters data-output data-hidden'>
-      <div class="col-8 data-plot">
-        <h5> Close approaches per day</h5>
-        <div id="neo-count" class="plot-view"></div>
+    <!--data content output area-->
+    <div class="data-content data-hidden">
+
+      <!--data plot output area top row-->
+      <div class='row no-gutters data-output'>
+        <div class="col-12 col-lg-8 data-plot">
+          <h5> Close approaches per day</h5>
+          <div id="neo-count"></div>
+        </div>
+        <div class="col-12 col-lg-4 data-plot data-border-left">
+          <h5> Hazardous to Earth?</h5>
+          <div id="potential-hazard"></div>
+        </div>
       </div>
-      <div class="col-4 data-plot data-border-left">
-        <h5> Hazard to Earth?</h5>
-        <div id="potential-hazard" class="plot-view"></div>
+      <!--data plot output area top row-->
+
+      <!--data plot output area bottom row-->
+      <div class="row no-gutters data-output">
+        <div class="col-12 col-lg-6 data-plot">
+          <h5> Earth miss distance (10^6 km)</h5>
+          <div id="close-approach-plot"></div>
+        </div>
+        <div class="col-12 col-lg-6 data-plot data-border-left">
+          <h5> Estimated maximum NEO diameter (km)</h5>
+          <div id="estimated-diameter-stack"></div>
+        </div>
+      </div>
+
+    <div class="row no-gutters data-output">
+      <div id="data-count" class="col-12 data-summary">
+        <span class="filter-count"></span> NEO's selected out of <span class="total-count"></span> close approaches in the selected time period.
+        <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
       </div>
     </div>
+    <!--data plot output area bottom row-->
 
-<div class="row no-gutters data-output data-hidden">
-      <div class="col-6 data-plot">
-        <h5> Earth miss distance (10^6 km)</h5>
-        <div id="close-approach-plot" class="plot-view"></div>
-      </div>
-      <div class="col-6 data-plot data-border-left">
-        <h5> Estimated maximum NEO diameter (km)</h5>
-        <div id="estimated-diameter-stack" class="plot-view"></div>
-      </div>
-    </div>
-    
-
-
-    <div class='row no-gutters data-table data-output data-hidden'>
+    <!--data table title-->
+    <div class='row no-gutters d-none d-lg-block data-table data-output'>
       <div class="col-12 data-plot-title">
         <h3> Top 10 Closest Approaches</h3>
       </div>
-      
+      <!--data table title-->
+
+      <!--data table output area-->
       <div class="col-12">
-        <table class="table table-bordered table-striped" id="neo_data_table">
+        <table class="table table-bordered" id="neo_data_table">
           <thead>
             <tr class="header">
               <th>Close approach date</th>
@@ -103,8 +120,14 @@
         </table>
       </div>
     </div>
+    <!--data table output area-->
 
   </div>
+  <!--data content output area-->
+
+  </div>
+  <!--content display area-->
+
 </body>
 
 </html>
