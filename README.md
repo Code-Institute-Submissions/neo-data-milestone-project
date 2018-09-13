@@ -34,24 +34,23 @@ In particular, as part of this section we recommend that you provide a list of U
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
 </p>
 
-## Features
+## Code Overview
 
 <p style="text-align: justify;">
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
+A brief description of the code used to develop the project and its purpose is given below. This is segemented into code developed for the HTML, CSS, and Javascript documents of the project.
 </p>
 
-#### Background image
 
-<p style="text-align: justify;">
-A background image of space is used to fill the entire page area and is used to border the content display area when margins are applied to it and to provide space themed imagery prior to data output generation.
-</p>
+### HTML: index.html
 
+The html document is separated into two main areas: the first being the search input area and the second is the data output display area. Both of these are contained within the content display area of the html
+document.
 
 #### Content display area
 
 <p style="text-align: justify;">
 The content display area is a 'div' element which contains all the content to be displayed to the page user. At smaller screen resolutions, 991px screen resolutions and below, 
-the content display area fills 100% of the screen width. At screen resolutions at 992px and above a left and right margin is applied to the content display area to allow the backgorund image to border the content display area.
+the content display area fills 100% of the screen width. At screen resolutions at 992px and above a left and right margin is applied to the content display area to allow a backgorund image to border the content display area.
 </p>
 
 #### Site title
@@ -68,26 +67,66 @@ In this section the user is given information on the purpose of the site. In add
 
 * start the NEO search
 * change start date to the previous week
-* change start date to the following week
+* change start date to the next week
 
-</p>
-
-#### html
 
 <p style="text-align: justify;">
 The search input area uses the bootstrap grid system to maintain layout over the full range of screen resolutions. The area is separated into two columns each with a width of 12. 
 The first column contains a ‘p’ element which contains the descriptive text for the website. Additionally, it contains an input box for the user to select a date to begin a NEO search. Upon focus, the input box will display a calendar which allows a date to be selected or alternatively a date can be manually entered.
-The second column contains the buttons used to begin the search or to change the date in the input box to the previous or following weeks.
+The second column contains the buttons used to begin the search or to change the date in the input box to the previous or next weeks.
 If no date is selected within the input box and one of the buttons is pressed: the input box will display the text: ‘Please enter a date’.
 </p>
 
-#### css
+#### Data output display area
 
 <p style="text-align: justify;">
-Media queries are used to alter the font size of the text throughout this section dependent upon the screen resolution it is being viewed on. 
+The data dashboard is split into four rows using Bootstrap's grid system. The first row is split into two columns each of width 6 with the column heading and plot centered within. 
+The first column contains a composite line chart displaying object counts for the total number of NEOs; total number of potentially hazardous NEOs; total number of NEOs with an Earth miss distance 
+less than 10 million km; and the total number of NEOs with an estimated maximum diameter greater than 2 km for each date of the search period specified. This has a column width of 6 and the heading 
+and plot are centered within the cloumn. The second column contains a stacked bar chart which counts the number of NEOs with estimated maximum diameters within a specified range 
+with close approaches to Earth on each date of the search period specified.
+</p>
+
+<p style="text-align: justify;">
+The second row is again split into two columns each of width 6 with the column heading and plot centered within.. The first column contains a stacked bar chart which counts the number of NEOs with 
+Earth miss distances within a specified range with close approaches to Earth on each date of the search period specified. The second column contains a pie chart displaying the proportion of potentially hazardous NEOs 
+to those that are not hazardous.
+</p>
+
+<p style="text-align: justify;">
+The third row is a single column of width 12 with the text centered within the column. This displays a count of the filtered data to the total data count. In addition to this a 'Reset All' link based on code obtained from [ref x]
+can be used to reset all the data plots and remove all chart filters.
+</p>
+
+<p style="text-align: justify;">
+The fourth row contains two columns each of width 12 with the text in each centered. The first is the title for the data table and the second column is a data table displaying information of NEOs with the 
+closest aproaches to Earth over the specified time period, with or without data filters applied. In addition to this, the fourth row is hidden at smaller screen resolutions to simplify the layout and 
+display on mobile devices.
+</p>
+
+#### CSS: style.css
+
+<p style="text-align: justify;">
+The HTML document was styled by calling the style.css document within the head of the document. CSS was developed using sass in the style.scss document and mapped to the style.css document. 
+</p>
+
+<p style="text-align: justify;">
+A background image of space is used to fill the entire page area and is used to border the content display area when margins are applied to it and to provide space themed imagery prior to data output generation.
+Media queries are used to alter the font size of the text throughout this section dependent upon the screen resolution it is being viewed on. Media query breakpoints were defined as follows:
+</p>
+
+* Extra-small screen maximum width breakpoint: 576px
+* Small screen maximum width breakpoint: 768px
+* Medium screen maximum width breakpoint: 992px
+* Large screen maximum width breakpoint: 1200px
+
+<p style="text-align: justify;">
+Additionally, these media queries were used to alter the column width of the data outputs to a width of 12 so that each data plot column would use the full width of the screen available.
 </p>
 
 ### Javascript: main.js
+
+![This image is not available](static/img/flowchart1.jpg)
 
 #### Datepicker 
 
