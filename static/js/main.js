@@ -12,6 +12,10 @@ $(document).ready(function() {
     $('#initial-search-date').datepicker({ //select date to start search//
         dateFormat: 'yy-mm-dd'
     });
+    
+    $('#initial-search-date').focus(function() {
+        $('.ui-datepicker').addClass('calendar-background'); //add class to date-picker calendar//
+    });
 
     $('button.data').click(function() {
             if (document.getElementById('initial-search-date').value === '') {
@@ -27,10 +31,6 @@ $(document).ready(function() {
         })
         .mouseenter(function() { $(this).animate({ "color": "black" }, 800) })
         .mouseleave(function() { $(this).animate({ "color": '#706e6e' }, 800) });
-
-    $('#initial-search-date').focus(function() {
-        $('.ui-datepicker').addClass('calendar-background'); //add class to date-picker calendar//
-    });
 
     $('#neo-feed').mouseenter(function() { $(this).animate({ "color": "#eb5d5d" }, 800) })
         .mouseleave(function() { $(this).animate({ "color": '#007bff' }, 800) }); //add styles to link//
