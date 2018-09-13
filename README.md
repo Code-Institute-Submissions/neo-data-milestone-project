@@ -2,18 +2,14 @@
     
 <p style="text-align: justify;">
 This project provides a data dashboard of the Near Earth objects (NEO's) undertaking close approaches to Earth in a specified time period. 
-Data is obtained from a NASA API [NeoW](https://api.nasa.gov/neo/?api_key=DEMO_KEY")
-which provides NEO information over a maximum 7 day period. This data dashboard obtains the data from the API; extracts the relevent data; post processes this data; and provides a visualisation of the NEO objects' 
-date of close approach; estimated diameter; Earth miss distance at its point of closest approach; and the potential hazard of these NEO's to Earth.
-</p> 
+Data is obtained from a NASA API which provides NEO information over a maximum 7 day period. This data dashboard obtains the data from the API; extracts the relevent data; post processes this data; 
+and provides a visualisation of the NEO objects' date of close approach; estimated diameter; Earth miss distance at its point of closest approach; and the potential hazard of these NEO's to Earth.
+</p>
+
 <p style="text-align: justify;">
 This data dashboard is aimed at the scientific community and can be utilised by astronomers to identify opportunities to view NEOs on a specific date; it could also be utilised by engineers planning space missions
 to a NEO and would allow a range of suitable targets to be identified for a specified launch date.
 </p>   
-    
-    
-    One or two paragraphs providing an overview of your project.
-    Essentially, this part is your sales pitch.
 
 ## User Experience Design
 
@@ -27,6 +23,35 @@ Use this section to provide insight into your UX process, focusing on who this w
 In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
     As a user type, I want to perform an action, so that I can achieve a goal.
  </p>   
+ 
+#### Astronomer
+ 
+<p style="text-align: justify;">
+I'm an astronomer and I woud like to find out which asteroids are making their close aproaches to Earth on Tuesday so that I can view them. 
+</p>
+<p style="text-align: justify;">
+Process:  the astronomer accesses the website and types in the search date for Tuesday, they can then filter the results by that date and decide which astreoid would be best suited 
+</p>
+
+#### Engineer/engineering student
+
+<p style="text-align: justify;">
+I'm an engineer (or engineering student) conducting a feasibility study on a satellite orbiting a NEO. I have a specified launch date of 2020-10-09 and would be in a position to inject into a trans-NEO orbiting
+by 2020-10-25. What NEOs would offer the best solution for a successful mission.
+</p>
+<p style="text-align: justify;">
+Process: The engineer would access the website and put in a date of 2020-10-25, this would then produce a range of information for potential targets for the mission.
+</p>
+
+#### Religious zealot
+
+<p style="text-align: justify;">
+I'm a religious zealot and I would like to know if armageddon is going to happen this week.
+</p>
+<p style="text-align: justify;">
+Process: The zealot would access the website and put in today's date, this would then produce a range of potentially hazardous near Earth objects to get excited about.
+</p>
+
  
 ### Wireframes/mockups
 
@@ -134,7 +159,7 @@ The flow of the javascript code from the point of entering a valid date into the
 ![This image is not available](static/img/flowchart2.jpg)
 
 <p style="text-align: justify;">
-A brief description of each of the functions used in the main.js document is given in the follwoing sections, below.
+A brief description of each of the functions used in the main.js document is given in the following sections, below.
 </p>
 
 #### Datepicker 
@@ -294,28 +319,25 @@ This function creates a table of NEOs with the ten closest approach distances an
 The function is called using the crossfilter data as the first argument and the chart variable name as its second argument.
 </p>
 
-### Data Output
-
-<p style="text-align: justify;"></p>
-
-
-### Existing Features
-    Feature 1 - allows users X to achieve Y, by having them fill out Z
-    Feature 2 - fdd
-    ...
-    For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
-    In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
 ### Features Left to Implement
-    Another feature idea
-    
-    error handling for incorrect number format in date field
+
+<p style="text-align: justify;">
+Code to more thoroughly check that a valid date has been entered into the text box is required. For example, if you enter a number into the search box which is not in a valid date format no code will execute. 
+Also, I would like to add the time of close approach of the asteroid to the data output as this would be a useful feature for those wishin to view the asteroid through as telescope.
+Additionally, a very cool feature which I'm not sure if it exists would be a Solar System equivalent of Google Maps. Here the current position of the selected NEOs would be displayed at the current time or at a chosen time. 
+In addition to this, I would like to spend some time investigating how difficult it would be to make the dc.js data plots responsive using CSS. I know thatthey can be manipulated by the CSS but the time required to achieve this
+may be prohibitive. 
+</p>
 
 ## Technologies Used
 In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
 
-### JQuery
-        The project uses JQuery to simplify DOM manipulation.
+The following technologies were used during the development of this project:
+
+* [JQuery](https://jquery.com/) was used for event handlers during the project. For example, when a button was clicked the id of that button was obtained and code written to pass that button id to a separate function.
+* 
+
 ### dc.js
 
 ### d3
@@ -324,8 +346,13 @@ In this section, you should mention all of the languages, frameworks, libraries,
 
 ### scss
 
+### crossfilter
+
+
 
 ## Code Validation 
+
+### google fonts
 
 ##  Testing
 In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
