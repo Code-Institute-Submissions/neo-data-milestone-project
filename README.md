@@ -127,6 +127,7 @@ Additionally, these media queries were used to alter the column width of the dat
 ### Javascript: main.js
 
 ![This image is not available](static/img/flowchart1.jpg)
+![This image is not available](static/img/flowchart2.jpg)
 
 #### Datepicker 
 
