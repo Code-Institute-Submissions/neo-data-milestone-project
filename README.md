@@ -2,7 +2,7 @@
     
 <p style="text-align: justify;">
 This project provides a data dashboard of the Near Earth objects (NEO's) undertaking close approaches to Earth in a specified time period. 
-Data is obtained from a NASA API (<a target="_blank" href = "https://api.nasa.gov/neo/?api_key=DEMO_KEY" style ="text-decoration: none;"> NeoW </a>)
+Data is obtained from a NASA API [NeoW](https://api.nasa.gov/neo/?api_key=DEMO_KEY")
 which provides NEO information over a maximum 7 day period. This data dashboard obtains the data from the API; extracts the relevent data; post processes this data; and provides a visualisation of the NEO objects' 
 date of close approach; estimated diameter; Earth miss distance at its point of closest approach; and the potential hazard of these NEO's to Earth.
 </p> 
@@ -126,8 +126,16 @@ Additionally, these media queries were used to alter the column width of the dat
 
 ### Javascript: main.js
 
+<p style="text-align: justify;">
+The flow of the javascript code from the point of entering a valid date into the html text box to the point of renedering the data output plots to the html document is shown in the flow diagrams below.
+</p>
+
 ![This image is not available](static/img/flowchart1.jpg)
 ![This image is not available](static/img/flowchart2.jpg)
+
+<p style="text-align: justify;">
+A brief description of each of the functions used in the main.js document is given in the follwoing sections, below.
+</p>
 
 #### Datepicker 
 
