@@ -43,13 +43,13 @@ by 2020-10-25. What NEOs would offer the best solution for a successful mission.
 Process: The engineer would access the website and put in a date of 2020-10-25, this would then produce a range of information for potential targets for the mission.
 </p>
 
-#### Religious zealot
+#### Doomsayers
 
 <p style="text-align: justify;">
-I'm a religious zealot and I would like to know if armageddon is going to happen this week.
+I'm a Doomsayer and I would like to know if armageddon is going to happen this week.
 </p>
 <p style="text-align: justify;">
-Process: The zealot would access the website and put in today's date, this would then produce a range of potentially hazardous near Earth objects to get excited about.
+Process: The doomsayer would access the website and put in today's date, this would then produce a range of potentially hazardous near Earth objects to get excited about.
 </p>
 
  
@@ -58,6 +58,9 @@ Process: The zealot would access the website and put in today's date, this would
 <p style="text-align: justify;">
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
 </p>
+
+![This image is not available](static/img/wireframe1.JPG)
+![This image is not available](static/img/wireframe2.jpg)
 
 ## Code Overview
 
