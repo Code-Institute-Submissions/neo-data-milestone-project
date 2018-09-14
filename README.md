@@ -50,17 +50,13 @@ excited about.
  
 ### Wireframes
 
-The layout for the website is defined on a desktop as shown in the wirefarme below:
+The layout for the website is defined on a desktop as shown in the wireframe below:
 
 ![This image is not available](static/img/wireframe1.JPG)
 
 The layout consists of a site title, followed by a search section. This search consists of an input box to allow a search date to be entered and buttons to allow 
-the search to be initiated or to alter the initial start date of the search. 
-
-This is followed by the data output section which consists of the data output plots followed by a table of NEO data. The layout of the site will be configured using 
-Bootstrap's grid system to allow responsive layout over different media.
-
-The configuration of the website on smaller screen resolutions is shown below:
+the search to be initiated or to alter the initial start date of the search. This is followed by the data output section which consists of the data output plots followed by a table of NEO data. The layout of the site will be configured using 
+Bootstrap's grid system to allow responsive layout over different media. The configuration of the website on smaller screen resolutions is shown below:
 
 ![This image is not available](static/img/wireframe2.jpg)
 
@@ -144,7 +140,7 @@ Additionally, these media queries were used to alter the column width of the dat
 
 ### Javascript: main.js
 
-The flow of the javascript code from the point of entering a valid date into the html text box to the point of renedering the data output plots to the html document is shown in the flow diagrams below.
+The flow of the javascript code from the point of entering a valid date into the html input box to the point of rendering the data output plots to the html document is shown in the flow diagrams below.
 
 ![This image is not available](static/img/flowchart1.jpg)
 ![This image is not available](static/img/flowchart2.jpg)
@@ -215,7 +211,7 @@ level and are accessible to reset calls. The functions containing the plot gener
 plots as the two input arguments. Finally, the call to render all data plots is implemented.
 
 
-#### Function: miss_distance(argument 1, argument 2, argument 3)
+#### Function: miss_distance (argument 1, argument 2, argument 3)
 
 This function is used to group the data based on the Earth miss distance of the NEO. The function has three input arguments, the first is the dimension about which to 
 group the data. The second is the minimum value of the miss distance and the third argument is the maximum value of the miss distance. The latter two input arguments are used to 
@@ -272,9 +268,9 @@ The function is called using the crossfilter data as the first argument and the 
 ### Features Left to Implement
 
 Code to more thoroughly check that a valid date has been entered into the text box is required. For example, if you enter a number into the search box which is not in a valid date format no code will execute. 
-Also, I would like to add the time of close approach of the asteroid to the data output as this would be a useful feature for those wishin to view the asteroid through as telescope.
+Also, I would like to add the time of close approach of the asteroid to the data output as this would be a useful feature for those wishing to view the asteroid through as telescope.
 Additionally, a very cool feature which I'm not sure if it exists would be a Solar System equivalent of Google Maps. Here the current position of the selected NEOs would be displayed at the current time or at a chosen time. 
-In addition to this, I would like to spend some time investigating how difficult it would be to make the dc.js data plots responsive using CSS. I know thatthey can be manipulated by the CSS but the time required to achieve this
+In addition to this, I would like to spend some time investigating how difficult it would be to make the dc.js data plots responsive using CSS. I am aware that they can be manipulated by the CSS but the time required to achieve this
 may be prohibitive. 
 
 ## Technologies Used
@@ -283,25 +279,26 @@ In this section, you should mention all of the languages, frameworks, libraries,
 The following technologies were used during the development of this project:
 
 * [JQuery](https://jquery.com/) was used for event handlers during the project. For example, when a button was clicked the id of that button was obtained and code written to pass that button id to a separate function.
-* 
-
-### dc.js
-
-### d3
-
-### Bootstrap
-
-### scss
-
-### crossfilter
+* [Crossfilter](http://square.github.io/crossfilter/) is a Javascript library for utilising large datasets within the website and was used to manipulate the NEO object data obtained from the API. 
+* [dc.js](https://dc-js.github.io/dc.js/) is a Javascript library for data visualization and analysis it was utilised to produce the interactive data plots for the website.
+* [d3](https://d3js.org/) is a JavaScript library for manipulation based on data. This was used to bind data to the output plots.
+* [Bootstrap](https://getbootstrap.com/) is an open  source framework for the development of HTML, CSS and JS. It was used in this project to control the layout of the website using the grid system.
+* [sass](https://sass-lang.com/) is an extension of CSS which allows for quick and easy organisation of the CSS. It was used to maintain clear and easy styles for the website and was mapped to the the stylesheet of the project.
+* [Google Fonts](https://fonts.google.com/) allows font styles to be added to the text of the website. This was used to specify the font used in website.
 
 
 
 ## Code Validation 
 
-### google fonts
 
 ##  Testing
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
 Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
 For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
@@ -315,6 +312,9 @@ You should also mention in this section any interesting bugs or problems you dis
 If this section grows too long, you may want to split it off into a separate file and link to it from here.
 
 ## Project Deployment 
+
+The project was deployed using GitHub and is published here: [Near Earth Object Close Approach Data Visualisation](https://chrismurray1980.github.io/neo-data-milestone-project/).
+
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
 In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
     Different values for environment variables (Heroku Config Vars)?
@@ -324,86 +324,48 @@ In addition, if it is not obvious, you should also describe how to run your code
 
 ## References
 
-### Media
-The photos used in this site were obtained from ...
+1. Clear input field text on refresh: https://stackoverflow.com/questions/52213/browser-refresh-behaviour
 
-### Acknowledgements
-I received inspiration for this project from X
+2. Placeholder text: https://www.w3schools.com/tags/att_input_placeholder.asp
 
-## Credits
+3. Table in dc.js: https://github.com/austinlyons/dcjs-leaflet-untappd
 
-### Content
-The text for section Y was copied from the Wikipedia article Z
-    
+4. Number precision: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Number/toPrecision
 
-The link below provides an official example of an expected structure for your readme file, that if followed in its entirety should get you 4 marks out of 5 on the assessment. To get the maximum 5 marks, you would need to include all of the parts below and also tailor the readme to your own particular project, providing any additional relevant information useful to your users and other developers who may want to contribute to the project.
+5. Date format: https://jsfiddle.net/taditdash/8FHwL/
 
+6. Date format: https://jqueryui.com/datepicker/
 
+7. Datepicker format: https://stackoverflow.com/questions/1328025/jquery-ui-datepicker-change-date-format
 
+8. Final js date code: https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
 
-//// clear input field text on refresh
-https://stackoverflow.com/questions/52213/browser-refresh-behaviour
+9. Object properties: https://dmitripavlutin.com/how-to-iterate-easily-over-object-properties-in-javascript/
 
-///////////////////////////// placeholder
-https://www.w3schools.com/tags/att_input_placeholder.asp
+10. Search sort: https://gist.github.com/onpubcom/1772996
 
-////////////////dc.js  table
-https://github.com/austinlyons/dcjs-leaflet-untappd
+11. Push to array: https://stackoverflow.com/questions/12491101/javascript-create-array-from-for-loop
 
+12. Add function for array: https://medium.com/@chrisburgin95/rewriting-javascript-sum-an-array-dbf838996ed0
 
-////number precision
+13. Iterate through object keys: http://pietschsoft.com/post/2015/09/05/JavaScript-Basics-How-to-create-a-Dictionary-with-KeyValue-pairs
 
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Number/toPrecision
+14. Callback functions: https://www.dashingd3js.com/lessons/javascript-callback-functions
 
-//// date format
+15. Ticks on x-axis: https://stackoverflow.com/questions/21497359/d3-js-change-format-of-price-and-date
 
-https://jsfiddle.net/taditdash/8FHwL/
-https://jqueryui.com/datepicker/
+16. JQuery animate: https://stackoverflow.com/questions/4347104/jquery-animate-css
 
+17. Sass media query: http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32
 
-//////////////
-///datepicker format
-https://stackoverflow.com/questions/1328025/jquery-ui-datepicker-change-date-format
-////////////////////
+18. Reset all: http://blockbuilder.org/blacklionb6/72c73e70b0588fc0964477fca999aa73
 
 
-
-////final js date code
-
-https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
+The link below provides an official example of an expected structure for your readme file, 
+that if followed in its entirety should get you 4 marks out of 5 on the assessment. To get the maximum 5 marks, 
+you would need to include all of the parts below and also tailor the readme to your own particular project, 
+providing any additional relevant information useful to your users and other developers who may want to contribute to the project.
 
 
 
 
-/// object properties
-https://dmitripavlutin.com/how-to-iterate-easily-over-object-properties-in-javascript/
-
-search sort//
-https://gist.github.com/onpubcom/1772996
-
-//push to array//
-https://stackoverflow.com/questions/12491101/javascript-create-array-from-for-loop
-
-//add function for array//
-https://medium.com/@chrisburgin95/rewriting-javascript-sum-an-array-dbf838996ed0
-
-//iterate through object keys//
-
-http://pietschsoft.com/post/2015/09/05/JavaScript-Basics-How-to-create-a-Dictionary-with-KeyValue-pairs
-
-
-//callback functions//
-https://www.dashingd3js.com/lessons/javascript-callback-functions
-
-//ticks on x-axis//
-https://stackoverflow.com/questions/21497359/d3-js-change-format-of-price-and-date
-
-//jquery animate//
-
-https://stackoverflow.com/questions/4347104/jquery-animate-css
-
-//sass media query//
-http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32
-
-//reset all//
-http://blockbuilder.org/blacklionb6/72c73e70b0588fc0964477fca999aa73
