@@ -28,9 +28,9 @@ $(document).ready(function() {
                 var button_id = this.id.toString(); //get the id of the search button clicked //
                 neo_search_period(button_id); //call search period function with button id as argument//
             }
-        })
-        .mouseenter(function() { $(this).animate({ "color": "black" }, 800) })
-        .mouseleave(function() { $(this).animate({ "color": '#706e6e' }, 800) });
+        });
+       // .mouseenter(function() { $(this).animate({ "color": "black" }, 500) })
+       // .mouseleave(function() { $(this).animate({ "color": '#706e6e' }, 500) });
 
     $('#neo-feed').mouseenter(function() { $(this).animate({ "color": "#eb5d5d" }, 800) })
         .mouseleave(function() { $(this).animate({ "color": '#007bff' }, 800) }); //add styles to link//
