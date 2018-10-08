@@ -24,6 +24,7 @@ body {
 
 //Content display style//
 .content-display {
+    width: 100%;
     margin: 0;
     background-color: #f7f6f6;
     @include data-border-left;
@@ -136,7 +137,8 @@ body {
     text-align: center;
     padding-bottom: 2%;
     overflow-x: scroll;
-    
+     @media screen and (min-width: $break-lg) { overflow-x: hidden; }
+     
     h5 {
         padding: 5% 0 6% 0;
         line-height: 1.5;
@@ -146,6 +148,7 @@ body {
         @media screen and (min-width: $break-md) { font-size: 18px; } 
         @media screen and (min-width: $break-lg) { font-size: 20px; }
     }
+    
 }
 
 .data-table-title {
@@ -219,11 +222,15 @@ body {
     text-decoration: none;
 }
 
+#neo-link {text-decoration: none;
+    &:hover { color: #eb5d5d;  transition: color 1s ease-in-out; -webkit-transition: color 1s ease-in-out; -moz-transition: color 1s ease-in-out;}
+}
 
 #neo_data_table {
     text-align: center;
     font-size: 13px;
     overflow-x: scroll;
-    
+    background-color: #fafafa;
+    margin: 0;
     @include data-border-bottom;
 }

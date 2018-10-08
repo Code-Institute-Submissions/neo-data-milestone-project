@@ -375,3 +375,6 @@ https://stackoverflow.com/questions/28227862/how-to-test-a-string-is-valid-date-
 
 anchor in datatable
 https://groups.google.com/forum/#!msg/dc-js-user-group/_NOGvYrUH8s/IUheoJP_2gQJ
+
+MULTIPLE TITLE LABELS
+https://github.com/dc-js/dc.js/issues/554

@@ -6,6 +6,7 @@ body {
   width: 100%; }
 
 .content-display {
+  width: 100%;
   margin: 0;
   background-color: #f7f6f6;
   border-left: 3px solid #bcc1c7;
@@ -127,6 +128,9 @@ body {
   text-align: center;
   padding-bottom: 2%;
   overflow-x: scroll; }
+  @media screen and (min-width: 992px) {
+    .data-plot {
+      overflow-x: hidden; } }
   .data-plot h5 {
     padding: 5% 0 6% 0;
     line-height: 1.5;
@@ -202,10 +206,20 @@ body {
   font-size: 18px;
   text-decoration: none; }
 
+#neo-link {
+  text-decoration: none; }
+  #neo-link:hover {
+    color: #eb5d5d;
+    transition: color 1s ease-in-out;
+    -webkit-transition: color 1s ease-in-out;
+    -moz-transition: color 1s ease-in-out; }
+
 #neo_data_table {
   text-align: center;
   font-size: 13px;
   overflow-x: scroll;
+  background-color: #fafafa;
+  margin: 0;
   border-bottom: 3px solid #bcc1c7; }
 
 /*# sourceMappingURL=style.css.map */
