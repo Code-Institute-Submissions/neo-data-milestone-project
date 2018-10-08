@@ -367,5 +367,11 @@ you would need to include all of the parts below and also tailor the readme to y
 providing any additional relevant information useful to your users and other developers who may want to contribute to the project.
 
 
+class not present
+https://stackoverflow.com/questions/7841048/how-to-check-if-an-element-does-not-have-a-specific-class
 
+valid date format
+https://stackoverflow.com/questions/28227862/how-to-test-a-string-is-valid-date-or-not-using-moment/30240547
 
+anchor in datatable
+https://groups.google.com/forum/#!msg/dc-js-user-group/_NOGvYrUH8s/IUheoJP_2gQJ

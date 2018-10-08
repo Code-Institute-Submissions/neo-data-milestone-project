@@ -21,7 +21,7 @@ body {
   background-color: #b7cee8;
   padding: 1% 0; }
   .site-title h1 {
-    color: #706e6e;
+    color: black;
     margin: 0;
     font-size: 15px; }
     @media screen and (min-width: 576px) {
@@ -98,7 +98,7 @@ body {
     width: 28%;
     border: 1px solid #706e6e;
     background-color: #b7cee8;
-    color: #706e6e;
+    color: black;
     font-size: 12px; }
     @media screen and (min-width: 576px) {
       .search-date-input button {
@@ -125,7 +125,8 @@ body {
 
 .data-plot {
   text-align: center;
-  padding-bottom: 2%; }
+  padding-bottom: 2%;
+  overflow-x: scroll; }
   .data-plot h5 {
     padding: 5% 0 6% 0;
     line-height: 1.5;
@@ -194,12 +195,17 @@ body {
   .data-table-title h3 {
     font-size: 25px;
     padding: 10px 0 8px 0;
-    color: #706e6e;
+    color: black;
     margin-bottom: 0; }
+
+#table-link {
+  font-size: 18px;
+  text-decoration: none; }
 
 #neo_data_table {
   text-align: center;
   font-size: 13px;
+  overflow-x: scroll;
   border-bottom: 3px solid #bcc1c7; }
 
 /*# sourceMappingURL=style.css.map */

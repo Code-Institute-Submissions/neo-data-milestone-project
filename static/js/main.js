@@ -18,66 +18,100 @@ $(document).ready(function() {
     });
 
     $('button.data').click(function() {
-            if (document.getElementById('initial-search-date').value === '') {
-                document.getElementById('initial-search-date').value = 'Please enter a date';
-            }
-            else if (document.getElementById('initial-search-date').value === 'Please enter a date') {
-                document.getElementById('initial-search-date').value = 'Please enter a date';
+        var input_date =  document.getElementById('initial-search-date').value;
+        var  date_validaton = Date.parse(input_date);
+        
+        console.log(date_validaton);
+        
+            if (date_validaton > 0) {
+                
+                var button_id = this.id.toString(); //get the id of the search button clicked //
+                
+                if ($('#data-output').hasClass("data-hidden")) {
+                    var data_output_state = 'false';
+                }           
+                else {data_output_state = 'true';}
+                
+                neo_search_period(button_id, data_output_state); //call search period function with button id as argument//
             }
             else {
-                var button_id = this.id.toString(); //get the id of the search button clicked //
-                neo_search_period(button_id); //call search period function with button id as argument//
+                
+                document.getElementById('initial-search-date').value = 'Please enter a date';
             }
         });
-       // .mouseenter(function() { $(this).animate({ "color": "black" }, 500) })
-       // .mouseleave(function() { $(this).animate({ "color": '#706e6e' }, 500) });
 
     $('#neo-feed').mouseenter(function() { $(this).animate({ "color": "#eb5d5d" }, 800) })
         .mouseleave(function() { $(this).animate({ "color": '#007bff' }, 800) }); //add styles to link//
 
     $('#reset-link').mouseenter(function() { $(this).animate({ "color": "#eb5d5d" }, 800) })
         .mouseleave(function() { $(this).animate({ "color": '#007bff' }, 800) }); //add styles to link//
+        
+    $('#table-link').mouseenter(function() { $(this).animate({ "color": "#eb5d5d" }, 800) })
+        .mouseleave(function() { $(this).animate({ "color": '#007bff' }, 800) }); //add styles to link//
 
     $('#search').click(function() {
         if (document.getElementById('initial-search-date').value != 'Please enter a date') {
             $('.data-hidden').delay(2000).queue(function() {
-                $(this).removeClass('data-hidden'); //reveal data output container elements//
+                $(this).removeClass('data-hidden').addClass('data-display'); //reveal data output container elements//
             });
         }
     });
+    
+    
 });
 
-
 //Definition of search period function with id as input argument//
-function neo_search_period(id) {
-
+function neo_search_period(id, data_output_state) {
+    
+    var state = data_output_state; // define variable based on data output state
+    
     var start_search_date = document.getElementById('initial-search-date').value, //get start date of NEO search from user//
         start_date = new Date(start_search_date), //create start date variable//
         new_date = new Date(start_date); //create new search date variable//
 
     if (id == 'search') { //if statement based on id returned for search button clicked//
 
-        new_date.setDate(new_date.getDate() + 7); //set new date of search period//
-        date_format(new_date); //call function to format date correctly//
-
-        var search_period = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + start_search_date + "&" +
-            window.search_date + "&api_key=snyH1wsmtSD133oCQy2spPHmK4PICRb2Y6PdAt4Q"; //create search URL//
-
-        retrieve_asteroid_data(search_period, data_extraction, plot_create); //call function to retrieve NEO data//
+       search_start(start_search_date, new_date);
     }
     else if (id == 'prev') {
-
         new_date.setDate(new_date.getDate() - 8); //set new date of search period//
         date_format(new_date); //call function to format date correctly//
         document.getElementById('initial-search-date').value = window.search_date; //write date to element//
+        
+        start_search_date = window.search_date;
+        start_date = new Date(start_search_date), //create start date variable//
+        new_date = new Date(start_date); //create new search date variable//
+        
+        if (state == 'true') {
+            search_start(start_search_date, new_date);
+        }
+        
     }
     else if (id == 'next') {
 
         new_date.setDate(new_date.getDate() + 8); //set new date of search period//
         date_format(new_date); //call function to format date correctly//
         document.getElementById('initial-search-date').value = window.search_date; //write date to element//
+        
+        start_search_date = window.search_date;
+        start_date = new Date(start_search_date), //create start date variable//
+        new_date = new Date(start_date); //create new search date variable//
+        
+        if (state == 'true') {
+            search_start(start_search_date, new_date);
+        }
     }
     else { alert('An error has occured'); } //alert user if error occurs//
+}
+
+function search_start(start, end) { // search function which calls main data generation function //
+        end.setDate(end.getDate() + 7); //set new date of search period//
+        date_format(end); //call function to format date correctly//
+
+        var search_period = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + start + "&" +
+            window.search_date + "&api_key=snyH1wsmtSD133oCQy2spPHmK4PICRb2Y6PdAt4Q"; //create search URL//
+
+        retrieve_asteroid_data(search_period, data_extraction, plot_create); //call function to retrieve NEO data//
 }
 
 
@@ -86,6 +120,7 @@ function date_format(date) {
     window.search_date = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2); //format date variable//
 }
 
+var n= 10;
 
 //Retrieve data from server and make data available via callback function//
 function retrieve_asteroid_data(search_url, data_create, print) {
@@ -100,7 +135,7 @@ function retrieve_asteroid_data(search_url, data_create, print) {
 
             data_create(JSON.parse(this.responseText)); //callback function with server response data as input argument//
 
-            print(); //callback function to plot data visualisations//
+            print(n); //callback function to plot data visualisations//
         }
     };
 }
@@ -151,10 +186,11 @@ function data_extraction(data) {
 }
 
 
-//function to create data visualisation//
-function plot_create() {
 
-    var ndx = crossfilter(neo_array); //pass data to crossfilter from NEO object array//
+//function to create data visualisation//
+function plot_create(n) {
+
+     var ndx = crossfilter(neo_array); //pass data to crossfilter from NEO object array//
 
     //define chart variables names//
     var neo_object_count_chart, hazardous_neo, close_approach_stacked, estimated_diameter_stacked, total_neo_count, neo_object_table;
@@ -164,7 +200,7 @@ function plot_create() {
     estimated_diameter_stack(ndx, estimated_diameter_stacked); //call estimated diameter stack plot//
     potential_hazard(ndx, hazardous_neo); //call potential hazard pie chart//
     neo_count(ndx, total_neo_count); // call total count function//
-    neo_data_table(ndx, neo_object_table); // call create NEO data table function//
+    neo_data_table(ndx, neo_object_table, n); // call create NEO data table function//
 
     dc.renderAll(); //render all plots//
 }
@@ -407,8 +443,9 @@ function neo_count(data, count) {
 }
 
 
+
 //NEO data table//
-function neo_data_table(data, table) {
+function neo_data_table(data, table, n) {
 
     var neo_data_dim = data.dimension(function(d) { return d; }); //create dimensions to be used in plotting
 
@@ -416,14 +453,14 @@ function neo_data_table(data, table) {
     table
         .dimension(neo_data_dim)
         .group(function(d) { return d; })
-        .size(10)
+        .size(n)
         .columns([
             function(d) { return d.close_approach_date; },
             function(d) { return d.name; },
             function(d) { return d.miss_distance_km.toPrecision(4); },
             function(d) { return d.estimated_diameter_max.toPrecision(4); },
             function(d) { return d.potential_hazard; },
-            function(d) { return d.nasa_jpl_url; }
+            function(d) { return '<a id="neo-link" href=\"' + d.nasa_jpl_url + '\" target=\"_blank\">' + d.nasa_jpl_url + '</a>';}
         ])
         .sortBy(function(d) { return d.miss_distance_km; })
         .order(d3.ascending)
