@@ -1,5 +1,3 @@
-//Create array variable//
-var neo_array = []; //create empty to store NEO object data//
 
 
 //Identify global variables//
@@ -42,17 +40,29 @@ $(document).ready(function() {
 
     $('.link').mouseenter(function() { $(this).animate({ "color": "#eb5d5d" }, 800) })
         .mouseleave(function() { $(this).animate({ "color": '#007bff' }, 800) }); //add styles to link//
+
+    $('#table_update_all').click(function(){
+
+            document.getElementById("table_title").innerHTML = "All Approaches";
+            var n = 200;
+            plot_create(n);
         
-    $('#search').click(function() {
-        if (document.getElementById('initial-search-date').value != 'Please enter a date') {
-            $('.data-hidden').delay(2000).queue(function() {
-                $(this).removeClass('data-hidden').addClass('data-display'); //reveal data output container elements//
-            });
-        }
+    });
+    
+    $('#table_update_top').click(function(){
+            document.getElementById("table_title").innerHTML = "Top 10 Closest Approaches";
+            var n = 10;
+            plot_create(n);
     });
     
     
+    
 });
+
+// Change data content area to visible //
+function display_data(){
+            $('#data-output').removeClass('data-hidden').addClass('data-display'); //reveal data output container elements//
+    }
 
 //Definition of search period function with id as input argument//
 function neo_search_period(id, data_output_state) {
@@ -114,7 +124,6 @@ function date_format(date) {
     window.search_date = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2); //format date variable//
 }
 
-var n= 10;
 
 //Retrieve data from server and make data available via callback function//
 function retrieve_asteroid_data(search_url, data_create, print) {
@@ -128,8 +137,10 @@ function retrieve_asteroid_data(search_url, data_create, print) {
         if (this.readyState == 4 && this.status == 200) {
 
             data_create(JSON.parse(this.responseText)); //callback function with server response data as input argument//
-
+            
+            var n= 10; // define initial table size//
             print(n); //callback function to plot data visualisations//
+            display_data(); //display data content area//
         }
     };
 }
@@ -138,23 +149,17 @@ function retrieve_asteroid_data(search_url, data_create, print) {
 //function to obtain NEO object data and create new object with required information//
 function data_extraction(data) {
 
-    neo_array = []; //clear previous data from array//
+    window.neo_array = []; //clear previous data from array//
 console.log(data.near_earth_objects);
     //extract keys from data objects//
     for (var key in data.near_earth_objects) {
 
-
         var date = data.near_earth_objects[key]; //obtain keys in 'near_earth_objects'//
-
 
         for (key in date) {
 
-
             var neo = date[key]; //obtain keys in 'date' objects// 
-
-
             var neo_object = {}; //create empty object to store information//
-
 
             neo_object.name = neo["name"];
             neo_object.nasa_jpl_url = neo["nasa_jpl_url"];
@@ -165,7 +170,7 @@ console.log(data.near_earth_objects);
             neo_object.relative_velocity_kmps = neo["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"];
             neo_object.potential_hazard = neo["is_potentially_hazardous_asteroid"];
             neo_object.links = neo["links"]["self"];
-            neo_array.push(neo_object); //push created data objects to array//
+            window.neo_array.push(neo_object); //push created data objects to array//
         }
     }
 }
@@ -173,9 +178,9 @@ console.log(data.near_earth_objects);
 
 
 //function to create data visualisation//
-function plot_create(n) {
+function plot_create(n, display_data) {
 
-     var ndx = crossfilter(neo_array); //pass data to crossfilter from NEO object array//
+    var ndx = crossfilter(window.neo_array); //pass data to crossfilter from NEO object array//
 
     //define chart variables names//
     var neo_object_count_chart, close_approach_stacked, estimated_diameter_stacked, hazardous_neo, total_neo_count, neo_object_table;
@@ -248,7 +253,7 @@ function number_hazardous_objects(data, chart) {
 
     var parse_date = d3.time.format("%Y-%m-%d").parse; //set format for date string//
 
-    neo_array.forEach(function(d) {
+    window.neo_array.forEach(function(d) {
         d.date = parse_date(d.close_approach_date); //parse date string//
     });
 
@@ -284,24 +289,24 @@ function number_hazardous_objects(data, chart) {
         .compose([
             dc.lineChart(chart)
             .colors('#96bae2')
-            .group(close_approaches, "Total number of NEO's per day").title(function(d) { return "There are a total of " + d.value + " NEO's on " + d.key; }),
+            .group(close_approaches, "Total number of NEO's per day").title(function(d) { return "There are a total of " + d.value + " NEO's making their close approach to Earth on this date" }),
             dc.lineChart(chart)
             .colors('#eb5d5d')
-            .group(hazards, "Neo's potentially hazardous to Earth").title(function(d) { return "There are a total of " + d.value + " potentially hazardous NEO's on " + d.key; }),
+            .group(hazards, "Neo's potentially hazardous to Earth").title(function(d) { return "There are a total of " + d.value + " potentially hazardous NEO's making their close approach to Earth on this date"}),
             dc.lineChart(chart)
             .colors('#ade49b')
             .group(lessThan10millionkm, "Miss distance less than 10 million km ")
             .valueAccessor(function(d) {
                 if (d.value.total > 0) { return d.value.total; }
                 else { return 0; }
-            }).title(function(d) { return "There are a total of " + d.value.total + " NEO's with an Earth miss distance less than 10 million km on " + d.key; }),
+            }).title(function(d) { return "There are a total of " + d.value.total + " NEO's with an Earth miss distance less than 10 million km making their close approach to Earth on this date" }),
             dc.lineChart(chart)
             .colors('#e378e4')
             .group(greaterThan2km, "Estimated diameter greater than 2km")
             .valueAccessor(function(d) {
                 if (d.value.total > 0) { return d.value.total; }
                 else { return 0; }
-            }).title(function(d) { return "There are a total of " + d.value.total + " NEO's with an estimated diameter greater than 2 km on " + d.key;  })
+            }).title(function(d) { return "There are a total of " + d.value.total + " NEO's with an estimated diameter greater than 2 km making their close approach to Earth on this date" })
         ])
 
         .brushOn(false)
@@ -342,9 +347,9 @@ function close_approach_stack(data, chart) {
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
         .ordinalColors(['#eb5d5d', '#b7cee8', '#ade49b'])
-        .title(function(d) {
-            return "There are " + d.value.total + " NEO's with this miss distance on " + d.key;
-        })
+        .title('less than 10*10^6 km', function(d) { return 'There are ' + d.value.total + ' NEOs with a close approach distance less than 10*10^6 km on ' + d.key; })
+        .title('less than 50*10^6 km', function(d) { return 'There are ' + d.value.total + ' NEOs with a close approach distance less than 50*10^6 km and greater than 10*10^6 km on ' + d.key; })
+        .title('greater than 50*10^6 km', function(d) { return 'There are ' + d.value.total + ' NEOs with a close approach distance greater than 50*10^6 km on ' + d.key; })
         .legend(dc.legend().x(50).y(-2).itemWidth(140).gap(5).horizontal(true))
         .yAxisLabel("Number of NEO objects")
         .xAxisLabel("Close approach date");
@@ -377,9 +382,9 @@ function estimated_diameter_stack(data, chart) {
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
         .ordinalColors(['#ade49b', '#b7cee8', '#eb5d5d'])
-        .title(function(d) {
-            return "There are " + d.value.total + " NEO's with this estimated maximum diameter approaching on " + d.key;
-        })
+        .title('less than 1km', function(d) { return 'There are ' + d.value.total + ' NEOs with an estimated diameter less than 1km on ' + d.key; })
+        .title('less than 2km', function(d) { return 'There are ' + d.value.total + ' NEOs with an estimated diameter less than 2km but greater than 1 km on ' + d.key; })
+        .title('greater than 2km', function(d) { return 'There are ' + d.value.total + ' NEOs with an estimated diameter greater than 2km on ' + d.key; })
         .legend(dc.legend().x(100).y(-2).itemWidth(100).gap(5).horizontal(true))
         .yAxisLabel("Number of NEO objects")
         .xAxisLabel("Close approach date");
