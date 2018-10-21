@@ -21,7 +21,6 @@ body {
     width: 100%;
 }
 
-
 //Content display style//
 .content-display {
     width: 100%;
@@ -31,6 +30,7 @@ body {
     @include data-border-right;
     
     @media screen and (min-width: $break-lg) {
+        width: 90%;
         margin: 0 5%;
         padding: 0;
     }
@@ -96,7 +96,7 @@ body {
         font-size: 12px;
         
         @media screen and (min-width: $break-md) {font-size: 14px; } 
-        @media screen and (min-width: $break-lg) { display: inline-block; margin-left: 2%; margin-right: 8%; margin-bottom: 2%; font-size: 16px; } 
+        @media screen and (min-width: $break-lg) { display: inline-block; margin-bottom: 2%; font-size: 16px; } 
         @media screen and (min-width: $break-xl) { font-size: 18px; }
     
     }
@@ -137,7 +137,7 @@ body {
     text-align: center;
     padding-bottom: 2%;
     overflow-x: scroll;
-     @media screen and (min-width: $break-lg) { overflow-x: hidden; }
+    @media screen and (min-width: $break-lg) { overflow-x: hidden; }
      
     h5 {
         padding: 5% 0 6% 0;
@@ -226,11 +226,28 @@ body {
     &:hover { color: #eb5d5d;  transition: color 1s ease-in-out; -webkit-transition: color 1s ease-in-out; -moz-transition: color 1s ease-in-out;}
 }
 
+#table-container {
+    overflow: scroll;
+}
+
 #neo_data_table {
     text-align: center;
     font-size: 13px;
-    overflow-x: scroll;
     background-color: #fafafa;
     margin: 0;
     @include data-border-bottom;
 }
+
+.return-container {
+    width:100%;
+    text-align: center;
+}
+
+#return {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    
+    @media screen and (min-width: $break-md) { font-size: 18px; }
+}
+

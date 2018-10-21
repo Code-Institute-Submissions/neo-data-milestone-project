@@ -23,7 +23,6 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
   <script type="text/javascript" src="static/js/main.js"></script>
   <!--js-->
 </head>
@@ -50,7 +49,9 @@
           close approach distance to Earth; and whether the NEO is potentially hazardous to Earth. It should be noted that the NEO's potential hazard to Earth is not specifically based upon whether it is immediately hazardous to Earth but it may be at
           a later date. Create the data visualisations by entering a start date for the search then press the 'Start Search' button to generate the data dashboard.
         </p>
-        <span>Please enter a start date for the search: </span>
+        <div>
+          <span>Please enter a start date for the search: </span>
+        </div>
         <input id="initial-search-date" type="text" autocomplete="off" placeholder="Click here to input date" />
       </div>
       <div class="col-12">
@@ -110,7 +111,7 @@
         <!--data table title-->
 
         <!--data table output area-->
-        <div class="col-12">
+        <div id="table-container" class="col-12">
           <table id="neo_data_table" class="table">
             <thead>
               <tr class="header">
@@ -132,7 +133,13 @@
 
   </div>
   <!--content display area-->
-
+  
+  <!--Back to top link-->
+  <div class="return-container">
+  <a id="return" class="data-hidden link" href="#">Back to top</a>
+  </div>
+  <!--Back to top link-->
+  
 </body>
 
 </html>
