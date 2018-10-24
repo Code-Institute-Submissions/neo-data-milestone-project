@@ -351,6 +351,12 @@ The following technologies were used during the development of this project:
 
 ## Code Validation 
 
+Each HTML page of the site was run through the [W3C markup validation Service](https://validator.w3.org/) and the CSS was run through the [W3C css validation Service](https://jigsaw.w3.org/css-validator/). 
+The results of the validator can be found here:
+
+[index.html](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/w3_html_validation.pdf)
+[style.css](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/w3_css_validation.pdf)
+
 
 ##  Testing
 
