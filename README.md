@@ -30,7 +30,7 @@ With aim of appealling to the scientific community, in addition to those with pa
  
 I'm an astronomer and I woud like to find out which asteroids are making their close aproaches to Earth on Tuesday, which is going to be a clear evening, so that I can potentially view them. 
 
-Process:  the astronomer accesses the website and types in the search date for Tuesday, they can then filter the results by that date and decide which astreoid would be best suited to view.
+Process:  the astronomer accesses the website and types in the search date for Tuesday, they can then filter the results by that date and decide which asteroid would be best suited to view.
 
 #### Engineer/engineering student
 
@@ -61,15 +61,14 @@ website on smaller screen resolutions is shown below:
 
 ![This image is not available](static/img/wireframe2.jpg)
 
-Again, the site title is at the top of the screen followed by the search input area, both of which take up the full width of the screen. This is folowed by
-the data output area but, in this case, each plot takes up the entire width of the screen. This is achieved using bootstrap's grid configuration. At smaller screen
-resolutions, the table area of the site is hidden as this would not provide a high quality display of information due to width constraints.
+Again, the site title is at the top of the screen followed by the search input area, both of which take up the full width of the screen. This is followed by
+the data output area but, in this case, each plot takes up the entire width of the screen. This is achieved using bootstrap's grid configuration. The overflow 
+attribute will be used to maintain the layout even if the data plots are greater than the screen width.
 
 ### User feedback
 
 User feedback will be provided within the search input area by a the generation of a calendar upon focus on the input box. In addition to this, when an incorrect date 
-is entered text will be displayed that will notify the user that the date entered is incorrect. Additionally, the text colour will change on the search buttons when 
-the mouse enters or leaves the button. This change will be a subtle as possible by the application of a transition duration to the event handler.
+is entered text will be displayed that will notify the user that the date entered is incorrect. 
 
 
 ## Code Overview
@@ -90,7 +89,7 @@ image to border the content display area.
 
 #### Site title
 
-The site title is generated as a part of the bootstrap grid system and is contained with a div  of class 'col-12' to ensure that it takes up the full width of the screen.
+The site title is generated as a part of the bootstrap grid system and is contained within a div of class 'col-12' to ensure that it takes up the full width of the screen.
 
 #### NEO search date 
 
@@ -102,9 +101,11 @@ In this section the user is given information on the purpose of the site. In add
 
 The search input area uses the bootstrap grid system to maintain layout over the full range of screen resolutions. The area is separated into two columns each with a width of 12. 
 The first column contains a ‘p’ element which contains the descriptive text for the website. Additionally, it contains an input box for the user to select a date to begin a NEO search. 
-Upon focus, the input box will display a calendar which allows a date to be selected or alternatively a date can be manually entered. The second column contains the buttons used to begin 
+Upon focus, the input box will display a calendar which allows a date to be selected or alternatively a date can be manually entered. 
+
+The second column contains the buttons used to begin 
 the search or to change the date in the input box to the previous or next weeks. These buttons were styled using Bootstrap. If no date is selected within the input box and one of the buttons
-is pressed: the input box will display the text: ‘Please enter a date’. If the date entered is in an incorrect format thenan alert will be displayed stating that 'An invalid date has been 
+is pressed: the input box will display the text: ‘Please enter a date’. If the date entered is in an incorrect format then an alert will be displayed stating that 'An invalid date has been 
 entered'.
 
 Prior to any data visualisations being generated the 'prev' and 'next' buttons will only change the date within the input box. However, if the data visualisations have been generated then the 
@@ -115,7 +116,7 @@ data will be automatically updated to the week selected in the input box.
 The data dashboard is split into four rows using Bootstrap's grid system. The first row is split into two columns each of width 6 with the column heading and plot centered within. 
 The first column contains a composite line chart displaying object counts for the total number of NEOs; total number of potentially hazardous NEOs; total number of NEOs with an Earth 
 miss distance less than 10 million km; and the total number of NEOs with an estimated maximum diameter greater than 2 km for each date of the search period specified. This has a column 
-width of 6 and the heading and plot are centered within the cloumn. The second column contains a stacked bar chart which counts the number of NEOs with estimated maximum diameters within 
+width of 6 and the heading and plot are centered within the column. The second column contains a stacked bar chart which counts the number of NEOs with estimated maximum diameters within 
 a specified range with close approaches to Earth on each date of the search period specified.
 
 The second row is again split into two columns each of width 6 with the column heading and plot centered within.. The first column contains a stacked bar chart which counts the number of NEOs
@@ -127,21 +128,21 @@ can be used to reset all the data plots and remove all chart filters.
 
 The fourth row contains two columns each of width 12 with the text in each centered. The first is the title for the data table and below this there are two buttons that allow the data displayed
 in the table below to be toggled between the 'Top 10 closest approaches' and 'All approaches'. These buttons were styled using Bootstrap. The second column is a data table displaying 
-information of NEOs with the closest aproaches to Earth by defualt over the specified time period, with or without data filters applied. Though this can be toggled to show data on 
+information of NEOs with the top 10 closest approaches to Earth over the specified time period being the default display. Though this can be toggled to show data on 
 all approaches.
 
 At smaller screen resolutions all data plots and the table, with the exception of the pie chart, utilise the overflow-x property so that plots which exceed the screen dimensions won't affect
 the page layout.
 
-Finally, at the bottom of the page is an anchor which allows the user to return to the top of the page without affecting the data visualisations.
+Finally, at the bottom of the page is an anchor which allows the user to return to the top of the page without affecting the data visualisations [reference 2].
 
 #### CSS: style.css
 
 The HTML document was styled by calling the style.css document within the head of the document. CSS was developed using SASS in the style.scss document and mapped to the style.css document using 
 the sass --watch style.scss command in the css folder within the command terminal. 
 
-A background image of space is used to fill the entire page area and is used to border the content display area when margins are applied to it and to provide space themed imagery prior to data 
-output generation. Media queries [ref 1] are used to alter the font size of the text throughout this section dependent upon the screen resolution it is being viewed on. Media query breakpoints were 
+A background image of space, the image is found [here](https://thefulldomeblog.files.wordpress.com/2013/06/cropped-starglobe-maya-render.jpg) is used to fill the entire page area and is used to border the content display area when margins are applied to it and to provide space themed imagery prior to data 
+output generation. Media queries [reference 3] are used to alter the font size of the text throughout this section dependent upon the screen resolution it is being viewed on. Media query breakpoints were 
 defined as follows:
  
 * Extra-small screen maximum width breakpoint: 576px
@@ -166,7 +167,7 @@ A brief description of each of the functions used in the main.js document is giv
 
 #### Datepicker 
 
-A datepicker function [ref 2] is used to generate the calendar for date selection. This function is called when the html date selection input box is activated. The date format used
+A datepicker function [reference 4] is used to generate the calendar for date selection. This function is called when the html date selection input box is activated. The date format used
 is YYYY-MM-DD.
 
 #### JQuery event handling 
@@ -177,25 +178,24 @@ A JQuery event handler is used to add a class to the calendar modal box when foc
 ##### Search buttons
 The 'previous week', 'start search' and 'next week' buttons are used as JQuery selectors with attached event handler functions and additional coding for incorrect inputs.
 This is undertaken as follows:
-Upon click: the value within the input box is read and the date is parsed. An If-else statement is utilised as follows:
 
-If the parsed date has a value greater than zero [ref 3] then the ID of the button clicked is converted to a string, this value is untilised by the 'neo_search_period' function
+Upon click, the value within the input box is read and the date is parsed. An If-else statement is utilised as follows:
+
+If the parsed date has a value greater than zero [reference 5] then the ID of the button clicked is converted to a string, this value is utilised by the 'neo_search_period' function
 later in the script. A nested If-else statement is then utilised. This is used to check whether the data visualisations have been generated previously by means of checking 
-whether the data-display region has a hidden class associated with it. If the data display region does have a class 'hidden' [ref 4], i.e. data hasn't been previously generated, then 
+whether the data-display region has a hidden class associated with it. If the data display region does have a class 'hidden' [reference 6], i.e. data hasn't been previously generated, then 
 a variable is created with the value 'false'. If the 'hidden' class is not associated with the data display region the variable will take a value of 'true'. Once the nested If-else statement
 has concluded the neo_search_period function is called with the button ID and whether it has the associated 'hidden' class as its input arguments.
 
 The else portion of the outer If-else statement is undertaken if the parsed date is less than zero. In this case the following text is displayed in the input box: 'Please enter a date'.
 In addition to this the user is alerted that 'An invalid date has been entered'.
 
-###### Table update buttons
+##### Table update buttons
 
 Once the data visualisations are visible then the table update buttons can be used to toggle between different data amounts displayed in the tables. In addition to this, the
 data visualisations will be reset so that filtering can be applied to the new table data. These both work as follows:
 
-Upon button click: 
-
-The table title is updated to the correct text and a variable n is generated dependent upon the button clicked and the amount of data to be displayed.
+Upon button click, the table title is updated to the correct text and a variable n is generated dependent upon the button clicked and the amount of data to be displayed.
 The variable 'n' is then used as an argument in the 'plot create' function which generates all the data visualisations. By default the value of 'n' is set to 10.
 
 ##### Return function
@@ -210,14 +210,14 @@ When the mouse enters an anchor on the HTML page this triggers an change in colo
 
 Once the 'neo_search_period' function has been called the function reads the start date from the html input box and from this creates a new Date() object instance. The input arguments 
 to this functions are the ID of the button clicked and the data-output-state which determines whether or not the data visualisations have been generated previously.
-One of three actions, based upon the html button id of the input argument of the function and the use of an If-else-if-else statement, is then performed.
+One of three actions, based upon the html button id of the input argument of the function and the use of an If-elseif-else statement, is then performed:
 
 ##### Start-search
 
 The search_start function is called with the start search date and the new Date object as its input arguments.
 
 
-##### Previous week start date
+##### Previous-week 
 
 If the 'previous week' button has been selected a second Date() object instance is created which is 8 days prior to the start date of the html input box. The 'date_format'
 function is utilised to format the date and this is then written to the html input box.
@@ -227,7 +227,7 @@ been generated previously, i.e. the second input argument to the neo_search_peri
 search date and the new Date object as its first and second input arguments, respectively. This allows automatic update of the data visualisations when the data visualisations 
 have been generated previously.
 
-##### Next week start date
+##### Next-week 
 
 If the 'next week' button has been selected a second Date() object instance is created which is 8 days after the start date of the html input box. The 'date_format'
 function is again utilised to format the date and this is then written to the html input box.
@@ -238,7 +238,7 @@ following week from the initial start date.
 ##### search_start(argument 1, argument 2)
 
 This function has the start date for the search as its first argument and the new Date object created as its second argument. This new date, 
-or search end date, is used as an input argument to the 'date_format' function [REF 2] which formats the date in the form YYYY-MM-DD. The start and end dates generated 
+or search end date, is used as an input argument to the 'date_format' function [reference 7] which formats the date in the form YYYY-MM-DD. The start and end dates generated 
 are then used as inputs for the construction of the data request to be sent to the API server. Once the server request function is constructed, 
 the 'retrieve_asteroid_data' function is called with the server request being the first of its three input arguments.
 
@@ -257,7 +257,7 @@ the 'retrieve_asteroid_data' function is called with the server request being th
 
 This function is passed as the second argument when the 'retrieve_asteroid_data' function is called. The data received from the server is used as its input argument and
 using the object keys of the data received, data for each individual NEO object is obtained. An empty object is created for each NEO object and the relevant data for the
-NEO object is added to create a new object with only the required information. Each new object created is pushed to an array which [ref 5], when populated for each NEO object,
+NEO object is added to create a new object with only the required information. Each new object created is pushed to an array which [reference 8], when populated for each NEO object,
 is used as the data for the visualisation.
 
 #### Function: plot_create ( )
@@ -288,7 +288,7 @@ date array are then extracted and are used to create the domain for the chart.
 
 This composite chart consists of four groups with the date the dimension for each one. The first of which is the total number of NEO's for a 
 specific date. This is calculated using anonymous functions to return the daily total. The second group is a count of the total number of potentially hazardous NEOs for a particular date. 
-This total is obtained using an IF statement which only adds to the total if the value is equal to 'true'. The third group is a count of the total number of NEOs on that date which have
+This total is obtained using an If statement which only adds to the total if the value is equal to 'true'. The third group is a count of the total number of NEOs on that date which have
 an Earth miss distance less than 10 million km. This is obtained by calling the miss_distance function which the correct input arguments. Finally, the fourth group is a count of the 
 total number of NEOs with an estimated maximum diameter greater than 2km. This total is obtained by calling the estimated_diameter function with the correct arguments.
 
@@ -313,12 +313,12 @@ which returns 'YES' if the potential hazard to Earth's object value is 'true', o
 
 #### Function: neo_count (argument 1, argument 2)
 
-This function creates a count of the total number of objects filtered and the total number of objects counted and was obtained using the code found here [ref 2]. 
+This function creates a count of the total number of objects filtered and the total number of objects counted and was obtained using the code found here [reference 9]. 
 The function is called using the crossfilter data as the first argument and the chart variable name as its second argument.
 
 #### Function: neo_data_table (argument 1, argument 2, argument 3)
 
-This function creates a table of NEOs with the ten closest approach distances and was obtained using the code found here [reference 6]. 
+This function creates a table of NEOs with the ten closest approach distances and was obtained using the code found here [reference 10]. 
 The function is called using the crossfilter data as the first argument;  the chart variable name as its second argument and the size 'n' of the table as its third argument. It is 
 the third argument which allows the table data to be changed upon button click between 'Top 10 closest approaches' and 'All approaches'. 
 
@@ -331,7 +331,7 @@ One final feature would be a timeout for the API request which would alert the u
 
 
 ### API Issues
-Over the course of the development of the project the NASA API has experienced server problems on three occasssions. On one of these occassions no repsonse from the server was obatined and 
+Over the course of the development of the project the NASA API has experienced server problems on three occasssions. On one of these occassions no response from the server was obtained and 
 this lasted the entirety of a weeekend. On the other two occassions the server was responding but would not return the full compliment of NEO object data and only returned a subset of this data. 
 
 
@@ -351,7 +351,7 @@ The following technologies were used during the development of this project:
 
 ## Code Validation 
 
-Each HTML page of the site was run through the [W3C markup validation Service](https://validator.w3.org/) and the CSS was run through the [W3C css validation Service](https://jigsaw.w3.org/css-validator/). 
+Each HTML page of the site was run through the [W3C markup validation Service](https://validator.w3.org/) and the CSS was run through the [W3C CSS validation Service](https://jigsaw.w3.org/css-validator/). 
 The results of the validator can be found here:
 
 * [index.html](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/w3_html_validation.pdf)
@@ -361,7 +361,7 @@ The results of the validator can be found here:
 ##  Testing
 
 The following tests were defined and undertaken for each of the sections of the code identified. Each test is assigned a Test I.D., a description of the test undertaken is given 
-and the test result (i.e. whether it passed or failed is stated).
+and the test result (i.e. whether it passed or failed) is stated.
 
 ### Search Date Input
 
@@ -511,12 +511,16 @@ The project was deployed using GitHub and is published here: [Near Earth Object 
 
 ## References
 
-1. Sass media query: http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32Reset all: http://blockbuilder.org/blacklionb6/72c73e70b0588fc0964477fca999aa73
-2. Datepicker format: https://stackoverflow.com/questions/1328025/jquery-ui-datepicker-change-date-format
-3. valid date format https://stackoverflow.com/questions/28227862/how-to-test-a-string-is-valid-date-or-not-using-moment/30240547
-4. class not present https://stackoverflow.com/questions/7841048/how-to-check-if-an-element-does-not-have-a-specific-class
-5. Push to array: https://stackoverflow.com/questions/12491101/javascript-create-array-from-for-loop
-6. Table in dc.js: https://github.com/austinlyons/dcjs-leaflet-untappd
+1. Reset all plots: https://dc-js.github.io/dc.js/docs/stock.html
+2. topFunction: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
+3. Sass media query: http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32Reset all: http://blockbuilder.org/blacklionb6/72c73e70b0588fc0964477fca999aa73
+4. Datepicker format: https://stackoverflow.com/questions/1328025/jquery-ui-datepicker-change-date-format
+5. valid date format https://stackoverflow.com/questions/28227862/how-to-test-a-string-is-valid-date-or-not-using-moment/30240547
+6. class not present https://stackoverflow.com/questions/7841048/how-to-check-if-an-element-does-not-have-a-specific-class
+7. Date format function: https://stackoverflow.com/questions/27480262/get-current-date-in-dd-mon-yyy-format-in-javascript-jquery
+8. Push to array: https://stackoverflow.com/questions/12491101/javascript-create-array-from-for-loop
+9. Object count: https://dc-js.github.io/dc.js/docs/stock.html
+10. Table in dc.js: https://github.com/austinlyons/dcjs-leaflet-untappd
 
 
 
