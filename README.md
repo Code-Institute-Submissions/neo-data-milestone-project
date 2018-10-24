@@ -141,7 +141,7 @@ The HTML document was styled by calling the style.css document within the head o
 the sass --watch style.scss command in the css folder within the command terminal. 
 
 A background image of space is used to fill the entire page area and is used to border the content display area when margins are applied to it and to provide space themed imagery prior to data 
-output generation. Media queries [ref x] are used to alter the font size of the text throughout this section dependent upon the screen resolution it is being viewed on. Media query breakpoints were 
+output generation. Media queries [ref 1] are used to alter the font size of the text throughout this section dependent upon the screen resolution it is being viewed on. Media query breakpoints were 
 defined as follows:
  
 * Extra-small screen maximum width breakpoint: 576px
@@ -166,7 +166,7 @@ A brief description of each of the functions used in the main.js document is giv
 
 #### Datepicker 
 
-A datepicker function [ref 1] is used to generate the calendar for date selection. This function is called when the html date selection input box is activated. The date format used
+A datepicker function [ref 2] is used to generate the calendar for date selection. This function is called when the html date selection input box is activated. The date format used
 is YYYY-MM-DD.
 
 #### JQuery event handling 
@@ -179,9 +179,9 @@ The 'previous week', 'start search' and 'next week' buttons are used as JQuery s
 This is undertaken as follows:
 Upon click: the value within the input box is read and the date is parsed. An If-else statement is utilised as follows:
 
-If the parsed date has a value greater than zero then the ID of the button clicked is converted to a string, this value is untilised by the 'neo_search_period' function
+If the parsed date has a value greater than zero [ref 3] then the ID of the button clicked is converted to a string, this value is untilised by the 'neo_search_period' function
 later in the script. A nested If-else statement is then utilised. This is used to check whether the data visualisations have been generated previously by means of checking 
-whether the data-display region has a hidden class associated with it. If the data display region does have a class 'hidden' [ref x], i.e. data hasn't been previously generated, then 
+whether the data-display region has a hidden class associated with it. If the data display region does have a class 'hidden' [ref 4], i.e. data hasn't been previously generated, then 
 a variable is created with the value 'false'. If the 'hidden' class is not associated with the data display region the variable will take a value of 'true'. Once the nested If-else statement
 has concluded the neo_search_period function is called with the button ID and whether it has the associated 'hidden' class as its input arguments.
 
@@ -257,7 +257,7 @@ the 'retrieve_asteroid_data' function is called with the server request being th
 
 This function is passed as the second argument when the 'retrieve_asteroid_data' function is called. The data received from the server is used as its input argument and
 using the object keys of the data received, data for each individual NEO object is obtained. An empty object is created for each NEO object and the relevant data for the
-NEO object is added to create a new object with only the required information. Each new object created is pushed to an array which, when populated for each NEO object,
+NEO object is added to create a new object with only the required information. Each new object created is pushed to an array which [ref 5], when populated for each NEO object,
 is used as the data for the visualisation.
 
 #### Function: plot_create ( )
@@ -318,7 +318,7 @@ The function is called using the crossfilter data as the first argument and the 
 
 #### Function: neo_data_table (argument 1, argument 2, argument 3)
 
-This function creates a table of NEOs with the ten closest approach distances and was obtained using the code found here [reference x].
+This function creates a table of NEOs with the ten closest approach distances and was obtained using the code found here [reference 6]. 
 The function is called using the crossfilter data as the first argument;  the chart variable name as its second argument and the size 'n' of the table as its third argument. It is 
 the third argument which allows the table data to be changed upon button click between 'Top 10 closest approaches' and 'All approaches'. 
 
@@ -354,8 +354,8 @@ The following technologies were used during the development of this project:
 Each HTML page of the site was run through the [W3C markup validation Service](https://validator.w3.org/) and the CSS was run through the [W3C css validation Service](https://jigsaw.w3.org/css-validator/). 
 The results of the validator can be found here:
 
-[index.html](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/w3_html_validation.pdf)
-[style.css](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/w3_css_validation.pdf)
+* [index.html](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/w3_html_validation.pdf)
+* [style.css](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/w3_css_validation.pdf)
 
 
 ##  Testing
@@ -511,24 +511,15 @@ The project was deployed using GitHub and is published here: [Near Earth Object 
 
 ## References
 
-1. Reset all: http://blockbuilder.org/blacklionb6/72c73e70b0588fc0964477fca999aa73
-2. Table in dc.js: https://github.com/austinlyons/dcjs-leaflet-untappd
-4. Number precision: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Number/toPrecision
-5. Date format: https://jsfiddle.net/taditdash/8FHwL/
-6. Date format: https://jqueryui.com/datepicker/
-7. Datepicker format: https://stackoverflow.com/questions/1328025/jquery-ui-datepicker-change-date-format
-8. valid date format https://stackoverflow.com/questions/28227862/how-to-test-a-string-is-valid-date-or-not-using-moment/30240547
-9. Final js date code: https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
-10. class not present https://stackoverflow.com/questions/7841048/how-to-check-if-an-element-does-not-have-a-specific-class
-11. Object properties: https://dmitripavlutin.com/how-to-iterate-easily-over-object-properties-in-javascript/
-12. Search sort: https://gist.github.com/onpubcom/1772996
-13. Push to array: https://stackoverflow.com/questions/12491101/javascript-create-array-from-for-loop
-14. Add function for array: https://medium.com/@chrisburgin95/rewriting-javascript-sum-an-array-dbf838996ed0
-15. Iterate through object keys: http://pietschsoft.com/post/2015/09/05/JavaScript-Basics-How-to-create-a-Dictionary-with-KeyValue-pairs
-16. Callback functions: https://www.dashingd3js.com/lessons/javascript-callback-functions
-17. Ticks on x-axis: https://stackoverflow.com/questions/21497359/d3-js-change-format-of-price-and-date
-18. JQuery animate: https://stackoverflow.com/questions/4347104/jquery-animate-css
-19. Sass media query: http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32
+1. Sass media query: http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32Reset all: http://blockbuilder.org/blacklionb6/72c73e70b0588fc0964477fca999aa73
+2. Datepicker format: https://stackoverflow.com/questions/1328025/jquery-ui-datepicker-change-date-format
+3. valid date format https://stackoverflow.com/questions/28227862/how-to-test-a-string-is-valid-date-or-not-using-moment/30240547
+4. class not present https://stackoverflow.com/questions/7841048/how-to-check-if-an-element-does-not-have-a-specific-class
+5. Push to array: https://stackoverflow.com/questions/12491101/javascript-create-array-from-for-loop
+6. Table in dc.js: https://github.com/austinlyons/dcjs-leaflet-untappd
+
+
+
 
 
 
