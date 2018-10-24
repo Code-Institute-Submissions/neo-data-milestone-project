@@ -103,7 +103,7 @@ In this section the user is given information on the purpose of the site. In add
 The search input area uses the bootstrap grid system to maintain layout over the full range of screen resolutions. The area is separated into two columns each with a width of 12. 
 The first column contains a ‘p’ element which contains the descriptive text for the website. Additionally, it contains an input box for the user to select a date to begin a NEO search. 
 Upon focus, the input box will display a calendar which allows a date to be selected or alternatively a date can be manually entered. The second column contains the buttons used to begin 
-the search or to change the date in the input box to the previous or next weeks. These bittons were styled using Bootstrap. If no date is selected within the input box and one of the buttons
+the search or to change the date in the input box to the previous or next weeks. These buttons were styled using Bootstrap. If no date is selected within the input box and one of the buttons
 is pressed: the input box will display the text: ‘Please enter a date’. If the date entered is in an incorrect format thenan alert will be displayed stating that 'An invalid date has been 
 entered'.
 
@@ -122,7 +122,7 @@ The second row is again split into two columns each of width 6 with the column h
 with Earth miss distances within a specified range with close approaches to Earth on each date of the search period specified. The second column contains a pie chart displaying the proportion
 of potentially hazardous NEOs to those that are not hazardous.
 
-The third row is a single column of width 12 with the text centered within the column. This displays a count of the filtered data to the total data count. In addition to this a 'Reset All' link based on code obtained from [ref x]
+The third row is a single column of width 12 with the text centered within the column. This displays a count of the filtered data to the total data count. In addition to this a 'Reset All' link based on code obtained from [reference 1]
 can be used to reset all the data plots and remove all chart filters.
 
 The fourth row contains two columns each of width 12 with the text in each centered. The first is the title for the data table and below this there are two buttons that allow the data displayed
@@ -141,7 +141,7 @@ The HTML document was styled by calling the style.css document within the head o
 the sass --watch style.scss command in the css folder within the command terminal. 
 
 A background image of space is used to fill the entire page area and is used to border the content display area when margins are applied to it and to provide space themed imagery prior to data 
-output generation. Media queries are used to alter the font size of the text throughout this section dependent upon the screen resolution it is being viewed on. Media query breakpoints were 
+output generation. Media queries [ref x] are used to alter the font size of the text throughout this section dependent upon the screen resolution it is being viewed on. Media query breakpoints were 
 defined as follows:
  
 * Extra-small screen maximum width breakpoint: 576px
@@ -318,14 +318,22 @@ The function is called using the crossfilter data as the first argument and the 
 
 #### Function: neo_data_table (argument 1, argument 2, argument 3)
 
-This function creates a table of NEOs with the ten closest approach distances and was obtained using the code found here [ref 3].
+This function creates a table of NEOs with the ten closest approach distances and was obtained using the code found here [reference x].
 The function is called using the crossfilter data as the first argument;  the chart variable name as its second argument and the size 'n' of the table as its third argument. It is 
-the third argument which allows the table data to be changed upon button click between 'Top 10 closest approaches' and 'All approaches'.
+the third argument which allows the table data to be changed upon button click between 'Top 10 closest approaches' and 'All approaches'. 
 
 ### Features Left to Implement
 
 A very cool feature which I'm not sure if it exists would be a Solar System equivalent of Google Maps. Here the current position of the selected NEOs would be displayed at the current 
-time or at a chosen time. . 
+time or at a chosen time. An additional feature could be a user selected end date which would allow the user to select a search period of less than 7 days, which is the maximum search period
+available from the API. Unfortunately, I have investigated whether the actual time of close approach of the NEO was available from the API but it is not and this would be a very useful addition.
+One final feature would be a timeout for the API request which would alert the user if there was an issue with the server that the request was sent to.
+
+
+### API Issues
+Over the course of the development of the project the NASA API has experienced server problems on three occasssions. On one of these occassions no repsonse from the server was obatined and 
+this lasted the entirety of a weeekend. On the other two occassions the server was responding but would not return the full compliment of NEO object data and only returned a subset of this data. 
+
 
 ## Technologies Used
 
@@ -346,23 +354,149 @@ The following technologies were used during the development of this project:
 
 ##  Testing
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+The following tests were defined and undertaken for each of the sections of the code identified. Each test is assigned a Test I.D., a description of the test undertaken is given 
+and the test result (i.e. whether it passed or failed is stated).
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
-    Contact form:
-        Go to the "Contact Us" page
-        Try to submit the empty form and verify that an error message about the required fields appears
-        Try to submit the form with an invalid email address and verify that a relevant error message appears
-        Try to submit the form with all inputs valid and verify that a success message appears.
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+### Search Date Input
+
+#### Calendar modal
+
+| Test I.D.     | Description                                                                           | Result|
+| ------------- |:-------------------------------------------------------------------------------------:| -----:|
+| T1            | Focus on the input text box and ensure that the calendar modal appears                | pass  |
+| T2            | The calendar modal has a been styled using the CSS style sheet                        | pass  |
+| T3            | The 'prev' and 'next' buttons change the calendar month                               | pass  |
+| T4            | The current month and year are the default display of the calendar modal              | pass  |
+| T4            | Upon a date selection, this value is diplayed in the input box with format YYYY-MM-DD | pass  |
+
+
+#### Date validation check
+
+| Test I.D.     | Description                                                                                                                           | Result|
+| ------------- |:-------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T5            | Enter a random number in the date input box and ensure that an window alert is displayed when the start search button is pressed      | pass  |
+| T6            | Enter letters into the input box and ensure these are not displayed                                                                   | pass  |
+| T7            | Enter dates in DD-MM-YYYY and MM-DD-YYYY formats and ensure that an window alert is displayed when the start search button is pressed | pass  |
+| T8            | Enter a date in YYYY-MM-DD and ensure that the plots are generated when the start search button is pressed                            | pass  |
+
+
+### Search Buttons
+
+#### Start Search
+
+| Test I.D.     | Description                                                                                                                           | Result|
+| ------------- |:-------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T9            | The data visualisations are generated for the 7 day period from the start date selected when the button is clicked                    | pass  |
+| T10           | An alert is generated on click when an invalid date is entered                                                                        | pass  |
+| T11           | Data visualisations are updated upon click for new selected user start date for the correct time period                               | pass  |
+
+#### Previous Week
+
+| Test I.D.     | Description                                                                                                                                             | Result|
+| ------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T12           | An alert is generated on click when an invalid date is entered                                                                                          | pass  |
+| T13           | If no data visualisations have been generated upon click the start date will be updated within the input box which is 8 days prior to the current value | pass  |
+| T14           | If plots have been generated previously upon click the start date will be updated as well as the data visualisations for the selected period            | pass  |
+
+#### Next Week
+
+| Test I.D.     | Description                                                                                                                                             | Result|
+| ------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T15           | An alert is generated on click when an invalid date is entered                                                                                          | pass  |
+| T16           | If no data visualisations have been generated upon click the start date will be updated within the input box which is 8 days after the current value    | pass  |
+| T17           | If plots have been generated previously upon click the start date will be updated as well as the data visualisations for the selected period            | pass  |
+
+
+### Data Visualisations
+
+#### Close approaches per day composite chart
+
+| Test I.D.     | Description                                                                                                                                             | Result|
+| ------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T18           | Upon legend highlight, the selected line will be highlighted and the remainder will fade                                                                | pass  |
+| T19           | Upon line point highlight, correct information for that line at its highlighted point is displayed                                                      | pass  |
+| T20           | The chart responds to filters applied to other charts in the data visualisation display area                                                            | pass  |
+
+
+#### Estimated maximum NEO diameter stacked bar chart
+
+| Test I.D.     | Description                                                                                                                                             | Result|
+| ------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T21           | Upon legend highlight, the selected bar portion will be highlighted and the remainder will fade                                                         | pass  |
+| T22           | Upon bar chart portion highlight, correct information for that highlighted portion of the chart is displayed                                            | pass  |
+| T23           | The chart responds to filters applied to other charts in the data visualisation display area                                                            | pass  |
+| T24           | The chart is filtered when a selected area of the chart is clicked                                                                                      | pass  |
+
+#### Earth miss distance stacked bar chart
+
+| Test I.D.     | Description                                                                                                                                             | Result|
+| ------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T25           | Upon legend highlight, the selected bar portion will be highlighted and the remainder will fade                                                         | pass  |
+| T26           | Upon bar chart portion highlight, correct information for that highlighted portion of the chart is displayed                                            | pass  |
+| T27           | The chart responds to filters applied to other charts in the data visualisation display area                                                            | pass  |
+| T28           | The chart is filtered when a selected area of the chart is clicked                                                                                      | pass  |
+
+#### Potentially hazardous to Earth pie chart
+
+| Test I.D.     | Description                                                                                                                                             | Result|
+| ------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T29           | Upon legend click, the selected bar portion will be highlighted and the remainder will fade                                                             | pass  |
+| T30           | Upon pie chart portion highlight, correct information for that highlighted portion of the chart is displayed                                            | pass  |
+| T31           | The chart responds to filters applied to other charts in the data visualisation display area                                                            | pass  |
+| T32           | The chart is filtered when a selected area of the chart is clicked                                                                                      | pass  |
+
+
+#### NEO object count
+
+| Test I.D.     | Description                                                                                                                                             | Result|
+| ------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T33           | Upon filtering of other charts the correct number of filtered objects is displayed as well as the total number of objects                               | pass  |
+| T34           | Upon click of the 'Reset All' link, all data on the page is reset                                                                                       | pass  |
+
+
+#### Data table 
+
+##### Table buttons
+
+| Test I.D.     | Description                                                                                                                                              | Result|
+| ------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T35           | The default display of the table is the 'Top 10 closest approaches'                                                                                      | pass  |
+| T36           | Upon click of the 'All' button the table title is updated to 'All Approaches' and all object data is displayed in the table for the selected time period | pass  |
+| T37           | Upon click of the 'Top 10' button the table title is updated to 'Top 10 closest approaches' and only the top 10 miss distances are shown                 | pass  |
+
+
+##### URL links in table
+
+| Test I.D.     | Description                                                                                                                                              | Result|
+| ------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T38           | The URL's in the table open in a new tab                                                                                                                 | pass  |
+| T39           | The information on the page opened corresponds to the information for that data entry                                                                    | pass  |
+
+### Page Configuration
+
+#### Page links
+
+| Test I.D.     | Description                                                                                                                                              | Result|
+| ------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T40           | Page links change colour on mouse enter and return to normal when the mouse leaves them                                                                  | pass  |
+| T41           | All clicked links open in a new tab, with the exception of the 'Reset All' link for data visualisation                                                   | pass  |
+
+
+#### Media queries and layout
+
+| Test I.D.     | Description                                                                                                                                              | Result|
+| ------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T42           | All text is legible and overflow of the data visualisations works correctly at the minimum screen width of 356px                                         | pass  |
+| T43           | All text is legible and overflow of the data visualisations works correctly at each media query breakpoint                                               | pass  |
+| T44           | Page layout is as intended at all screen sizes and the bootstrap gird system has been correctly implemented                                              | pass  |
+
+
+#### User stories
+
+| Test I.D.     | Description                                                                                                                                              | Result|
+| ------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------:| -----:|
+| T45           | Is each user story defined achievable and easy to execute                                                                                                | pass  |
+
 
 ## Project Deployment 
 
@@ -372,9 +506,7 @@ The project was deployed using GitHub and is published here: [Near Earth Object 
 ## References
 
 1. Reset all: http://blockbuilder.org/blacklionb6/72c73e70b0588fc0964477fca999aa73
-2. Clear input field text on refresh: https://stackoverflow.com/questions/52213/browser-refresh-behaviour
-2. Placeholder text: https://www.w3schools.com/tags/att_input_placeholder.asp
-3. Table in dc.js: https://github.com/austinlyons/dcjs-leaflet-untappd
+2. Table in dc.js: https://github.com/austinlyons/dcjs-leaflet-untappd
 4. Number precision: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Number/toPrecision
 5. Date format: https://jsfiddle.net/taditdash/8FHwL/
 6. Date format: https://jqueryui.com/datepicker/
