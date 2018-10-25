@@ -3,236 +3,357 @@ body {
   font-family: 'Roboto', sans-serif;
   background-image: url("https://thefulldomeblog.files.wordpress.com/2013/06/cropped-starglobe-maya-render.jpg");
   height: 100%;
-  width: 100%; }
+  width: 100%;
+}
 
 .content-display {
   width: 100%;
   margin: 0;
   background-color: #f7f6f6;
   border-left: 3px solid #bcc1c7;
-  border-right: 3px solid #bcc1c7; }
-  @media screen and (min-width: 992px) {
-    .content-display {
-      width: 90%;
-      margin: 0 5%;
-      padding: 0; } }
+  border-right: 3px solid #bcc1c7;
+}
+
+@media screen and (min-width: 992px) {
+  .content-display {
+    width: 90%;
+    margin: 0 5%;
+    padding: 0;
+  }
+}
 
 .site-title {
   border-top: 3px solid #bcc1c7;
   text-align: center;
   background-color: #b7cee8;
-  padding: 1% 0; }
+  padding: 1% 0;
+}
+
+.site-title h1 {
+  color: black;
+  margin: 0;
+  font-size: 15px;
+}
+
+@media screen and (min-width: 576px) {
   .site-title h1 {
-    color: black;
-    margin: 0;
-    font-size: 15px; }
-    @media screen and (min-width: 576px) {
-      .site-title h1 {
-        font-size: 18px; } }
-    @media screen and (min-width: 768px) {
-      .site-title h1 {
-        font-size: 22px; } }
-    @media screen and (min-width: 992px) {
-      .site-title h1 {
-        font-size: 30px; } }
-    @media screen and (min-width: 1200px) {
-      .site-title h1 {
-        font-size: 35px; } }
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .site-title h1 {
+    font-size: 22px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .site-title h1 {
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .site-title h1 {
+    font-size: 35px;
+  }
+}
 
 .search-date-input {
   border-top: 3px solid #bcc1c7;
   border-bottom: 3px solid #bcc1c7;
   text-align: center;
-  padding: 2% 0 0 0; }
+  padding: 2% 0 0 0;
+}
+
+.search-date-input p {
+  margin: 0 3% 1% 3%;
+  text-align: justify;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 768px) {
   .search-date-input p {
-    margin: 0 3% 1% 3%;
-    text-align: justify;
-    font-size: 12px; }
-    @media screen and (min-width: 768px) {
-      .search-date-input p {
-        font-size: 14px; } }
-    @media screen and (min-width: 992px) {
-      .search-date-input p {
-        font-size: 16px; } }
-    @media screen and (min-width: 1200px) {
-      .search-date-input p {
-        font-size: 18px; } }
-    .search-date-input p #neo-feed {
-      text-decoration: none; }
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .search-date-input p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .search-date-input p {
+    font-size: 18px;
+  }
+}
+
+.search-date-input p #neo-feed {
+  text-decoration: none;
+}
+
+.search-date-input span {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 768px) {
   .search-date-input span {
-    font-weight: bold;
-    font-size: 12px; }
-    @media screen and (min-width: 768px) {
-      .search-date-input span {
-        font-size: 14px; } }
-    @media screen and (min-width: 992px) {
-      .search-date-input span {
-        font-size: 16px; } }
-    @media screen and (min-width: 1200px) {
-      .search-date-input span {
-        font-size: 18px; } }
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .search-date-input span {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .search-date-input span {
+    font-size: 18px;
+  }
+}
+
+.search-date-input input {
+  margin: 1.5% 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.18% 0.2%;
+  border: 1px solid #706e6e;
+  display: block;
+  text-align: center;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 768px) {
   .search-date-input input {
-    margin: 1.5% 0;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0.18% 0.2%;
-    border: 1px solid #706e6e;
-    display: block;
-    text-align: center;
-    font-size: 12px; }
-    @media screen and (min-width: 768px) {
-      .search-date-input input {
-        font-size: 14px; } }
-    @media screen and (min-width: 992px) {
-      .search-date-input input {
-        display: inline-block;
-        margin-bottom: 2%;
-        font-size: 16px; } }
-    @media screen and (min-width: 1200px) {
-      .search-date-input input {
-        font-size: 18px; } }
-  .search-date-input button {
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .search-date-input input {
+    display: inline-block;
     margin-bottom: 2%;
-    width: 28%;
-    border: 1px solid #706e6e;
-    background-color: #b7cee8;
-    color: black;
-    font-size: 12px; }
-    @media screen and (min-width: 576px) {
-      .search-date-input button {
-        width: 20%; } }
-    @media screen and (min-width: 768px) {
-      .search-date-input button {
-        font-size: 16px;
-        width: 18%; } }
-    @media screen and (min-width: 992px) {
-      .search-date-input button {
-        font-size: 18px;
-        width: 16%; } }
-    @media screen and (min-width: 1200px) {
-      .search-date-input button {
-        font-size: 20px; } }
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .search-date-input input {
+    font-size: 18px;
+  }
+}
+
+.search-date-input button {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+  width: 28%;
+  border: 1px solid #706e6e;
+  background-color: #b7cee8;
+  color: black;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 576px) {
+  .search-date-input button {
+    width: 20%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search-date-input button {
+    font-size: 16px;
+    width: 18%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .search-date-input button {
+    font-size: 18px;
+    width: 16%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .search-date-input button {
+    font-size: 20px;
+  }
+}
 
 .calendar-background {
   background-color: #fafafa;
   padding: 10px;
-  border: 1px solid #706e6e; }
+  border: 1px solid #706e6e;
+}
 
 .ui-datepicker-header a {
-  padding-right: 5%; }
+  padding-right: 5%;
+}
 
 .data-plot {
   text-align: center;
   padding-bottom: 2%;
-  overflow-x: scroll; }
-  @media screen and (min-width: 992px) {
-    .data-plot {
-      overflow-x: hidden; } }
+  overflow-x: scroll;
+}
+
+@media screen and (min-width: 992px) {
+  .data-plot {
+    overflow-x: hidden;
+  }
+}
+
+.data-plot h5 {
+  padding: 5% 0 6% 0;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 576px) {
   .data-plot h5 {
-    padding: 5% 0 6% 0;
-    line-height: 1.5;
-    font-size: 14px; }
-    @media screen and (min-width: 576px) {
-      .data-plot h5 {
-        font-size: 16px; } }
-    @media screen and (min-width: 768px) {
-      .data-plot h5 {
-        font-size: 18px; } }
-    @media screen and (min-width: 992px) {
-      .data-plot h5 {
-        font-size: 20px; } }
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .data-plot h5 {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .data-plot h5 {
+    font-size: 20px;
+  }
+}
 
 .data-table-title {
   width: 100%;
   text-align: center;
-  background-color: #b7cee8; }
-  .data-table-title h3 {
-    font-size: 25px;
-    padding: 10px 0 8px 0;
-    color: #706e6e;
-    margin-bottom: 0; }
+  background-color: #b7cee8;
+}
+
+.data-table-title h3 {
+  font-size: 25px;
+  padding: 10px 0 8px 0;
+  color: #706e6e;
+  margin-bottom: 0;
+}
 
 .data-hidden {
-  display: none; }
+  display: none;
+}
 
 #neo-count,
 #close-approach-plot,
 #estimated-diameter-stack {
   float: none;
-  width: 100%; }
-  #neo-count svg g .axis.x .tick text,
-  #close-approach-plot svg g .axis.x .tick text,
-  #estimated-diameter-stack svg g .axis.x .tick text {
-    text-anchor: end !important;
-    transform: rotate(-40deg);
-    margin-top: 200px; }
+  width: 100%;
+}
+
+#neo-count svg g .axis.x .tick text,
+#close-approach-plot svg g .axis.x .tick text,
+#estimated-diameter-stack svg g .axis.x .tick text {
+  text-anchor: end !important;
+  transform: rotate(-40deg);
+  margin-top: 200px;
+}
 
 #potential-hazard {
   margin-top: -40px;
-  float: none; }
+  float: none;
+}
 
 #data-count {
   text-align: center;
   padding: 1% 0;
-  font-size: 12px; }
-  @media screen and (min-width: 576px) {
-    #data-count {
-      font-size: 14px; } }
-  @media screen and (min-width: 768px) {
-    #data-count {
-      font-size: 16px; } }
-  @media screen and (min-width: 992px) {
-    #data-count {
-      font-size: 18px; } }
-  #data-count #reset-link {
-    text-decoration: none; }
+  font-size: 12px;
+}
+
+@media screen and (min-width: 576px) {
+  #data-count {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #data-count {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  #data-count {
+    font-size: 18px;
+  }
+}
+
+#data-count #reset-link {
+  text-decoration: none;
+}
 
 .data-table-title {
   border-top: 3px solid #bcc1c7;
   border-bottom: 3px solid #bcc1c7;
   width: 100%;
   text-align: center;
-  background-color: #b7cee8; }
-  .data-table-title h3 {
-    font-size: 25px;
-    padding: 10px 0 8px 0;
-    color: black;
-    margin-bottom: 0; }
+  background-color: #b7cee8;
+}
+
+.data-table-title h3 {
+  font-size: 25px;
+  padding: 10px 0 8px 0;
+  color: black;
+  margin-bottom: 0;
+}
 
 #table-link {
   font-size: 18px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 #neo-link {
-  text-decoration: none; }
-  #neo-link:hover {
-    color: #eb5d5d;
-    transition: color 1s ease-in-out;
-    -webkit-transition: color 1s ease-in-out;
-    -moz-transition: color 1s ease-in-out; }
+  text-decoration: none;
+}
+
+#neo-link:hover {
+  color: #eb5d5d;
+  transition: color 1s ease-in-out;
+  -webkit-transition: color 1s ease-in-out;
+  -moz-transition: color 1s ease-in-out;
+}
 
 #table-container {
-  overflow: scroll; }
+  overflow: scroll;
+}
 
 #neo_data_table {
   text-align: center;
   font-size: 13px;
   background-color: #fafafa;
   margin: 0;
-  border-bottom: 3px solid #bcc1c7; }
+  border-bottom: 3px solid #bcc1c7;
+}
 
 .return-container {
   width: 100%;
-  text-align: center; }
+  text-align: center;
+}
 
 #return {
   text-decoration: none;
   color: #007bff;
-  font-size: 16px; }
-  @media screen and (min-width: 768px) {
-    #return {
-      font-size: 18px; } }
+  font-size: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  #return {
+    font-size: 18px;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */

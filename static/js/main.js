@@ -1,4 +1,3 @@
-
 //Identify global variables
 /* global dc, d3, crossfilter, $, topFunction */
 
@@ -9,77 +8,77 @@ $(document).ready(function() {
     $('#initial-search-date').datepicker({ //select date to start search
         dateFormat: 'yy-mm-dd'
     });
-    
+
     $('#initial-search-date').focus(function() {
         $('.ui-datepicker').addClass('calendar-background'); //add class to date-picker calendar
     });
 
     $('button.data').click(function() {
-        var input_date =  document.getElementById('initial-search-date').value;
-        var  date_validaton = Date.parse(input_date);
-        
-            if (date_validaton > 0) {
-                var button_id = this.id.toString(); //get the id of the search button clicked 
-                
-                if ($('#data-output').hasClass("data-hidden")) {
-                    var data_output_state = 'false';
-                }           
-                else {data_output_state = 'true';}
-                
-                neo_search_period(button_id, data_output_state); //call search period function with button id as argument
+        var input_date = document.getElementById('initial-search-date').value;
+        var date_validaton = Date.parse(input_date);
+
+        if (date_validaton > 0) {
+            var button_id = this.id.toString(); //get the id of the search button clicked 
+
+            if ($('#data-output').hasClass("data-hidden")) {
+                var data_output_state = 'false';
             }
-            else {
-                document.getElementById('initial-search-date').value = 'Please enter a date';
-                alert("An invalid date has been entered");
-            }
-        });
+            else { data_output_state = 'true'; }
+
+            neo_search_period(button_id, data_output_state); //call search period function with button id as argument
+        }
+        else {
+            document.getElementById('initial-search-date').value = 'Please enter a date';
+            alert("An invalid date has been entered");
+        }
+    });
 
     $('.link').mouseenter(function() { $(this).animate({ "color": "#eb5d5d" }, 800) })
         .mouseleave(function() { $(this).animate({ "color": '#007bff' }, 800) }); //add styles to link
 
-    $('#table_update_all').click(function(){ //table button to show all NEO data
-            document.getElementById("table_title").innerHTML = "All Approaches";
-            var n = 200;
-            plot_create(n);
+    $('#table_update_all').click(function() { //table button to show all NEO data
+        document.getElementById("table_title").innerHTML = "All Approaches";
+        var n = 200;
+        plot_create(n);
     });
-    
-    $('#table_update_top').click(function(){ //table button to show top 10 closest approaches
-            document.getElementById("table_title").innerHTML = "Top 10 Closest Approaches";
-            var n = 10;
-            plot_create(n);
+
+    $('#table_update_top').click(function() { //table button to show top 10 closest approaches
+        document.getElementById("table_title").innerHTML = "Top 10 Closest Approaches";
+        var n = 10;
+        plot_create(n);
     });
-    
+
     $("#return").click(topFunction()); //Return to top 
 });
 
 // Change data content area to visible
-function display_data(){
-            $('#data-output').removeClass('data-hidden').addClass('data-display'); //reveal data output container elements//
-            $('#return').removeClass('data-hidden'); //reveal back to top link//
-    }
+function display_data() {
+    $('#data-output').removeClass('data-hidden').addClass('data-display'); //reveal data output container elements//
+    $('#return').removeClass('data-hidden'); //reveal back to top link//
+}
 
 //Definition of search period function with id as input argument
 function neo_search_period(id, data_output_state) {
-    
+
     var state = data_output_state; // define variable based on data output state
-    
+
     var start_search_date = document.getElementById('initial-search-date').value, //get start date of NEO search from user
         start_date = new Date(start_search_date), //create start date variable
         new_date = new Date(start_date); //create new search date variable
 
     if (id == 'search') { //if statement based on id returned for search button clicked
 
-       search_start(start_search_date, new_date);
+        search_start(start_search_date, new_date);
     }
     else if (id == 'prev') {
         new_date.setDate(new_date.getDate() - 8); //set new date of search period
         date_format(new_date); //call function to format date correctly
         document.getElementById('initial-search-date').value = window.search_date; //write date to element
-        
+
         start_search_date = window.search_date;
         start_date = new Date(start_search_date), //create start date variable
-        new_date = new Date(start_date); //create new search date variable
-        
+            new_date = new Date(start_date); //create new search date variable
+
         if (state == 'true') {
             search_start(start_search_date, new_date);
         }
@@ -89,11 +88,11 @@ function neo_search_period(id, data_output_state) {
         new_date.setDate(new_date.getDate() + 8); //set new date of search period
         date_format(new_date); //call function to format date correctly
         document.getElementById('initial-search-date').value = window.search_date; //write date to element
-        
+
         start_search_date = window.search_date;
         start_date = new Date(start_search_date), //create start date variable
-        new_date = new Date(start_date); //create new search date variable
-        
+            new_date = new Date(start_date); //create new search date variable
+
         if (state == 'true') {
             search_start(start_search_date, new_date);
         }
@@ -102,14 +101,14 @@ function neo_search_period(id, data_output_state) {
 }
 
 // search function which calls main data generation function 
-function search_start(start, end) { 
-        end.setDate(end.getDate() + 7); //set new date of search period
-        date_format(end); //call function to format date correctly
+function search_start(start, end) {
+    end.setDate(end.getDate() + 7); //set new date of search period
+    date_format(end); //call function to format date correctly
 
-        var search_period = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + start + "&" +
-            window.search_date + "&api_key=snyH1wsmtSD133oCQy2spPHmK4PICRb2Y6PdAt4Q"; //create search URL
+    var search_period = "https://api.nasa.gov/neo/rest/v1/feed?start_date=" + start + "&" +
+        window.search_date + "&api_key=snyH1wsmtSD133oCQy2spPHmK4PICRb2Y6PdAt4Q"; //create search URL
 
-        retrieve_asteroid_data(search_period, data_extraction, plot_create); //call function to retrieve NEO data
+    retrieve_asteroid_data(search_period, data_extraction, plot_create); //call function to retrieve NEO data
 }
 
 // Function to output date in the required format
@@ -130,8 +129,8 @@ function retrieve_asteroid_data(search_url, data_create, print) {
         if (this.readyState == 4 && this.status == 200) {
 
             data_create(JSON.parse(this.responseText)); //callback function with server response data as input argument
-            
-            var n= 10; // define initial table size
+
+            var n = 10; // define initial table size
             print(n); //callback function to plot data visualisations
             display_data(); //display data content area
         }
@@ -163,7 +162,7 @@ function data_extraction(data) {
             neo_object.relative_velocity_kmps = neo["close_approach_data"][0]["relative_velocity"]["kilometers_per_second"];
             neo_object.potential_hazard = neo["is_potentially_hazardous_asteroid"];
             neo_object.links = neo["links"]["self"];
-            
+
             window.neo_array.push(neo_object); //push created data objects to array
         }
     }
@@ -281,7 +280,7 @@ function number_hazardous_objects(data, chart) {
             .group(close_approaches, "Total number of NEO's per day").title(function(d) { return "There are a total of " + d.value + " NEO's making their close approach to Earth on this date" }),
             dc.lineChart(chart)
             .colors('#eb5d5d')
-            .group(hazards, "Neo's potentially hazardous to Earth").title(function(d) { return "There are a total of " + d.value + " potentially hazardous NEO's making their close approach to Earth on this date"}),
+            .group(hazards, "Neo's potentially hazardous to Earth").title(function(d) { return "There are a total of " + d.value + " potentially hazardous NEO's making their close approach to Earth on this date" }),
             dc.lineChart(chart)
             .colors('#ade49b')
             .group(lessThan10millionkm, "Miss distance less than 10 million km ")
@@ -433,7 +432,7 @@ function neo_data_table(data, table, n) {
             function(d) { return d.miss_distance_km.toPrecision(4); },
             function(d) { return d.estimated_diameter_max.toPrecision(4); },
             function(d) { return d.potential_hazard; },
-            function(d) { return '<a id="neo-link" href=\"' + d.nasa_jpl_url + '\" target=\"_blank\">' + d.nasa_jpl_url + '</a>';}
+            function(d) { return '<a id="neo-link" href=\"' + d.nasa_jpl_url + '\" target=\"_blank\">' + d.nasa_jpl_url + '</a>'; }
         ])
         .sortBy(function(d) { return d.miss_distance_km; })
         .order(d3.ascending)

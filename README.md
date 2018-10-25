@@ -357,6 +357,9 @@ The results of the validator can be found here:
 * [index.html](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/w3_html_validation.pdf)
 * [style.css](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/w3_css_validation.pdf)
 
+The JavaScript code was run through [JSHint](https://jshint.com/) with no errors found:
+
+* [main.js](https://github.com/chrismurray1980/neo-data-milestone-project/blob/master/static/img/jshint_code.pdf)
 
 ##  Testing
 

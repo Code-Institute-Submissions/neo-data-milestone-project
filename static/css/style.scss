@@ -6,10 +6,21 @@ $break-xl: 1200px;
 
 
 //Border placeholders//
-@mixin data-border-top {border-top: 3px solid #bcc1c7;}
-@mixin data-border-bottom {border-bottom: 3px solid #bcc1c7;}
-@mixin data-border-left {border-left: 3px solid #bcc1c7;}
-@mixin data-border-right {border-right: 3px solid #bcc1c7;}
+@mixin data-border-top {
+    border-top: 3px solid #bcc1c7;
+}
+
+@mixin data-border-bottom {
+    border-bottom: 3px solid #bcc1c7;
+}
+
+@mixin data-border-left {
+    border-left: 3px solid #bcc1c7;
+}
+
+@mixin data-border-right {
+    border-right: 3px solid #bcc1c7;
+}
 
 
 //Body style//
@@ -28,7 +39,7 @@ body {
     background-color: #f7f6f6;
     @include data-border-left;
     @include data-border-right;
-    
+
     @media screen and (min-width: $break-lg) {
         width: 90%;
         margin: 0 5%;
@@ -44,15 +55,23 @@ body {
     background-color: #b7cee8;
     padding: 1% 0;
 
-     h1 { 
+    h1 {
         color: black;
         margin: 0;
         font-size: 15px;
-        
-        @media screen and (min-width: $break-sm) { font-size: 18px; } 
-        @media screen and (min-width: $break-md) { font-size: 22px; } 
-        @media screen and (min-width: $break-lg) { font-size: 30px; } 
-        @media screen and (min-width: $break-xl) { font-size: 35px; } 
+
+        @media screen and (min-width: $break-sm) {
+            font-size: 18px;
+        }
+        @media screen and (min-width: $break-md) {
+            font-size: 22px;
+        }
+        @media screen and (min-width: $break-lg) {
+            font-size: 30px;
+        }
+        @media screen and (min-width: $break-xl) {
+            font-size: 35px;
+        }
     }
 }
 
@@ -68,21 +87,35 @@ body {
         margin: 0 3% 1% 3%;
         text-align: justify;
         font-size: 12px;
-        
-        @media screen and (min-width: $break-md) { font-size: 14px; } 
-        @media screen and (min-width: $break-lg) { font-size: 16px; } 
-        @media screen and (min-width: $break-xl) { font-size: 18px; }
-        
-        & #neo-feed {text-decoration: none;}  
+
+        @media screen and (min-width: $break-md) {
+            font-size: 14px;
+        }
+        @media screen and (min-width: $break-lg) {
+            font-size: 16px;
+        }
+        @media screen and (min-width: $break-xl) {
+            font-size: 18px;
+        }
+
+        & #neo-feed {
+            text-decoration: none;
+        }
     }
 
     span {
         font-weight: bold;
         font-size: 12px;
-        
-        @media screen and (min-width: $break-md) { font-size: 14px; } 
-        @media screen and (min-width: $break-lg) { font-size: 16px; } 
-        @media screen and (min-width: $break-xl) { font-size: 18px; }
+
+        @media screen and (min-width: $break-md) {
+            font-size: 14px;
+        }
+        @media screen and (min-width: $break-lg) {
+            font-size: 16px;
+        }
+        @media screen and (min-width: $break-xl) {
+            font-size: 18px;
+        }
     }
 
     input {
@@ -94,11 +127,19 @@ body {
         display: block;
         text-align: center;
         font-size: 12px;
-        
-        @media screen and (min-width: $break-md) {font-size: 14px; } 
-        @media screen and (min-width: $break-lg) { display: inline-block; margin-bottom: 2%; font-size: 16px; } 
-        @media screen and (min-width: $break-xl) { font-size: 18px; }
-    
+
+        @media screen and (min-width: $break-md) {
+            font-size: 14px;
+        }
+        @media screen and (min-width: $break-lg) {
+            display: inline-block;
+            margin-bottom: 2%;
+            font-size: 16px;
+        }
+        @media screen and (min-width: $break-xl) {
+            font-size: 18px;
+        }
+
     }
 
     button {
@@ -110,11 +151,21 @@ body {
         background-color: #b7cee8;
         color: black;
         font-size: 12px;
-         
-        @media screen and (min-width: $break-sm) { width: 20%;}   
-        @media screen and (min-width: $break-md) { font-size: 16px; width: 18%;} 
-        @media screen and (min-width: $break-lg) { font-size: 18px; width: 16%; } 
-        @media screen and (min-width: $break-xl) { font-size: 20px; }
+
+        @media screen and (min-width: $break-sm) {
+            width: 20%;
+        }
+        @media screen and (min-width: $break-md) {
+            font-size: 16px;
+            width: 18%;
+        }
+        @media screen and (min-width: $break-lg) {
+            font-size: 18px;
+            width: 16%;
+        }
+        @media screen and (min-width: $break-xl) {
+            font-size: 20px;
+        }
 
     }
 }
@@ -122,9 +173,9 @@ body {
 
 //Search date calendar style//    
 .calendar-background {
-        background-color: #fafafa;
-        padding: 10px;
-        border: 1px solid #706e6e;
+    background-color: #fafafa;
+    padding: 10px;
+    border: 1px solid #706e6e;
 }
 
 .ui-datepicker-header a {
@@ -137,18 +188,26 @@ body {
     text-align: center;
     padding-bottom: 2%;
     overflow-x: scroll;
-    @media screen and (min-width: $break-lg) { overflow-x: hidden; }
-     
+    @media screen and (min-width: $break-lg) {
+        overflow-x: hidden;
+    }
+
     h5 {
         padding: 5% 0 6% 0;
         line-height: 1.5;
         font-size: 14px;
-        
-        @media screen and (min-width: $break-sm) { font-size: 16px; } 
-        @media screen and (min-width: $break-md) { font-size: 18px; } 
-        @media screen and (min-width: $break-lg) { font-size: 20px; }
+
+        @media screen and (min-width: $break-sm) {
+            font-size: 16px;
+        }
+        @media screen and (min-width: $break-md) {
+            font-size: 18px;
+        }
+        @media screen and (min-width: $break-lg) {
+            font-size: 20px;
+        }
     }
-    
+
 }
 
 .data-table-title {
@@ -166,7 +225,9 @@ body {
 
 
 //Data hidden style//
-.data-hidden { display: none; }
+.data-hidden {
+    display: none;
+}
 
 
 //Output specific styles//
@@ -190,15 +251,23 @@ body {
 
 
 #data-count {
-    text-align: center; 
-    padding: 1% 0; 
-    font-size: 12px; 
-    
-    @media screen and (min-width: $break-sm) { font-size: 14px; } 
-    @media screen and (min-width: $break-md) { font-size: 16px; } 
-    @media screen and (min-width: $break-lg) { font-size: 18px; }
-        
-    & #reset-link {text-decoration: none;}
+    text-align: center;
+    padding: 1% 0;
+    font-size: 12px;
+
+    @media screen and (min-width: $break-sm) {
+        font-size: 14px;
+    }
+    @media screen and (min-width: $break-md) {
+        font-size: 16px;
+    }
+    @media screen and (min-width: $break-lg) {
+        font-size: 18px;
+    }
+
+    & #reset-link {
+        text-decoration: none;
+    }
 }
 
 
@@ -222,8 +291,14 @@ body {
     text-decoration: none;
 }
 
-#neo-link {text-decoration: none;
-    &:hover { color: #eb5d5d;  transition: color 1s ease-in-out; -webkit-transition: color 1s ease-in-out; -moz-transition: color 1s ease-in-out;}
+#neo-link {
+    text-decoration: none;
+    &:hover {
+        color: #eb5d5d;
+        transition: color 1s ease-in-out;
+        -webkit-transition: color 1s ease-in-out;
+        -moz-transition: color 1s ease-in-out;
+    }
 }
 
 #table-container {
@@ -239,7 +314,7 @@ body {
 }
 
 .return-container {
-    width:100%;
+    width: 100%;
     text-align: center;
 }
 
@@ -247,7 +322,8 @@ body {
     text-decoration: none;
     color: #007bff;
     font-size: 16px;
-    
-    @media screen and (min-width: $break-md) { font-size: 18px; }
-}
 
+    @media screen and (min-width: $break-md) {
+        font-size: 18px;
+    }
+}
